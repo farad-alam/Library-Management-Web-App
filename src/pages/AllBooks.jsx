@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 import allBooksApi from '../api/allBooksApi';
 
 const AllBooks = () => {
-  const {updateBook, books } = useData();
+  const { updateBook, books, loadBooks } = useData();
 
   const [isLoading, setisLoading] = useState(false);
   // const [books, setBooks] = useState([]);
@@ -24,18 +24,10 @@ const AllBooks = () => {
     document.title = 'All Books - LibraryHub';
   }, []);
 
-  // useEffect(()=>{
-  //   setisLoading(true)
-  //   const unsubscribe = allBooksApi().then( (data) => {
-  //     setBooks(data)
-  //     setisLoading(false);
-  //   }
-  //   ).catch(err =>{
-  //     setisLoading(false);
-  //     console.error("can not load books", err)
-  //   })
-    
-  // },[])
+  useEffect(()=>{
+   
+   loadBooks() 
+  },[isUpdateModalOpen])
 
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
