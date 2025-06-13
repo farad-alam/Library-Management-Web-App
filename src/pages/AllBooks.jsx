@@ -9,10 +9,10 @@ import Swal from 'sweetalert2';
 import allBooksApi from '../api/allBooksApi';
 
 const AllBooks = () => {
-  const {updateBook } = useData();
+  const {updateBook, books } = useData();
 
   const [isLoading, setisLoading] = useState(false);
-  const [books, setBooks] = useState([]);
+  // const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
@@ -24,18 +24,18 @@ const AllBooks = () => {
     document.title = 'All Books - LibraryHub';
   }, []);
 
-  useEffect(()=>{
-    setisLoading(true)
-    const unsubscribe = allBooksApi().then( (data) => {
-      setBooks(data)
-      setisLoading(false);
-    }
-    ).catch(err =>{
-      setisLoading(false);
-      console.error("can not load books", err)
-    })
+  // useEffect(()=>{
+  //   setisLoading(true)
+  //   const unsubscribe = allBooksApi().then( (data) => {
+  //     setBooks(data)
+  //     setisLoading(false);
+  //   }
+  //   ).catch(err =>{
+  //     setisLoading(false);
+  //     console.error("can not load books", err)
+  //   })
     
-  },[])
+  // },[])
 
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -68,7 +68,7 @@ const AllBooks = () => {
       image: formData.get('image'),
     };
 
-    updateBook(selectedBook.id, updates);
+    updateBook(selectedBook._id, updates);
     setIsUpdateModalOpen(false);
     setSelectedBook(null);
 

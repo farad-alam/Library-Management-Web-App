@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import singleBookApi from '../api/singleBookApi';
+import updateBookApi from '../api/updateBookApi';
+import allBooksApi from '../api/allBooksApi';
 
 const DataContext = createContext(undefined);
 
@@ -26,9 +28,11 @@ export const DataProvider = ({ children }) => {
       setIsLoading(true);
       
       // Load books
-      const booksResponse = await fetch('/books.json');
-      const booksData = await booksResponse.json();
-      setBooks(booksData);
+      allBooksApi()
+      .then(data => setBooks(data))
+      // const booksResponse = await fetch('/books.json');
+      // const booksData = await booksResponse.json();
+      // setBooks(booksData);
 
       // Load categories
       const categoriesResponse = await fetch('/categories.json');
@@ -63,9 +67,10 @@ export const DataProvider = ({ children }) => {
   };
 
   const updateBook = (id, updates) => {
-    setBooks(prev => prev.map(book => 
-      book.id === id ? { ...book, ...updates } : book
-    ));
+    setIsLoading(true)
+    return updateBookApi(id, updates).finally(()=>{
+      setIsLoading(false)
+    })
   };
 
   const borrowBook = (bookId, userId, returnDate) => {
