@@ -9,7 +9,7 @@ import useAuth from '../hooks/useAuth';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, user, isLoading } = useAuth();
+  const { login, user, signWithGoogle, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   
@@ -21,6 +21,7 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  // chnage dynamic title and if user redierct to desire url
   useEffect(() => {
     document.title = 'Login - LibraryHub';
     if (user) {
@@ -42,20 +43,40 @@ const Login = () => {
       
       navigate(from, { replace: true });
     } catch (error) {
+      navigate("/login");
       Swal.fire({
         icon: 'error',
         title: 'Login Failed',
         text: error instanceof Error ? error.message : 'An error occurred during login',
       });
+      
     }
   };
 
-  const handleGoogleLogin = () => {
-    Swal.fire({
-      icon: 'info',
-      title: 'Google Login',
-      text: 'Google login integration will be available soon!',
-    });
+  const handleGoogleLogin = async() => {
+    try {
+      await signWithGoogle();
+
+      Swal.fire({
+        icon: "success",
+        title: "Welcome back!",
+        text: "You have successfully logged in with Google.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      navigate(from, { replace: true });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login with google Failed",
+        text:
+          error instanceof Error
+            ? error.message
+            : "An error occurred during login",
+      });
+    }
+    
   };
 
   if (isLoading) {

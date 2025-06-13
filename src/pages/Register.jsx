@@ -10,7 +10,7 @@ import useAuth from '../hooks/useAuth';
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { register: registerUser, user, isLoading } = useAuth();
+  const { register: registerUser, updateUserProfile, user, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -31,17 +31,35 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await registerUser(data.name, data.email, data.password, data.photoURL);
+
+      // register with emil and pass
+      await registerUser(data.email, data.password);
       
-      Swal.fire({
-        icon: 'success',
-        title: 'Welcome to LibraryHub!',
-        text: 'Your account has been created successfully.',
-        timer: 2000,
-        showConfirmButton: false,
-      });
+      // if registerd then update with name and photo
+      try {
+        await updateUserProfile(data.name, data.photoURL)
+
+        Swal.fire({
+          icon: "success",
+          title: "Welcome to LibraryHub!",
+          text: "Your account has been created successfully.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
+        navigate("/");
+
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text:
+            error instanceof Error
+              ? error.message
+              : "An error occurred during Update Your Profile",
+        });
+      }
       
-      navigate('/');
     } catch (error) {
       Swal.fire({
         icon: 'error',

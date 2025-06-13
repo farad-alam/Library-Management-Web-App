@@ -18,12 +18,14 @@ function FirebaseAuthProvider({ children }) {
   // console.log("FIREBASE INITILIZE");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-//   auth loading
+  //   auth loading
   const [isLoading, setisLoading] = useState(true);
 
   const register = (email, password) => {
     setisLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    return createUserWithEmailAndPassword(auth, email, password).finally(() =>
+      setisLoading(false)
+    );
   };
   const updateUserProfile = (name, imgURL) => {
     setisLoading(true);
@@ -37,7 +39,9 @@ function FirebaseAuthProvider({ children }) {
 
   const login = (email, password) => {
     setisLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password).finally(() =>
+      setisLoading(false)
+    );
   };
   const logout = () => {
     setisLoading(true);
@@ -46,7 +50,9 @@ function FirebaseAuthProvider({ children }) {
 
   const signWithGoogle = () => {
     setisLoading(true);
-    return signInWithPopup(auth, googleProvider);
+    return signInWithPopup(auth, googleProvider).finally(() =>
+      setisLoading(false)
+    );
   };
 
   const resetPasswordEmail = (email) => {
@@ -96,4 +102,3 @@ function FirebaseAuthProvider({ children }) {
 }
 
 export default FirebaseAuthProvider;
-
