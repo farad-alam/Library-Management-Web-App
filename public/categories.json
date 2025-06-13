@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Fiction",
+    "description": "Immerse yourself in captivating stories and imaginative worlds",
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "bookCount": 25
+  },
+  {
+    "id": 2,
+    "name": "Science",
+    "description": "Explore the wonders of scientific discovery and innovation",
+    "image": "https://images.pexels.com/photos/1319854/pexels-photo-1319854.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "bookCount": 18
+  },
+  {
+    "id": 3,
+    "name": "Philosophy",
+    "description": "Delve into profound questions about existence and meaning",
+    "image": "https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "bookCount": 12
+  },
+  {
+    "id": 4,
+    "name": "Romance",
+    "description": "Experience love stories that touch the heart and soul",
+    "image": "https://images.pexels.com/photos/1319854/pexels-photo-1319854.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "bookCount": 20
+  }
+]

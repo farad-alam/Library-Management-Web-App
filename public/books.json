@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "category": "Fiction",
+    "quantity": 5,
+    "rating": 4.5,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "A classic American novel set in the Jazz Age, exploring themes of wealth, love, and the American Dream through the story of Jay Gatsby's pursuit of Daisy Buchanan."
+  },
+  {
+    "id": 2,
+    "name": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "category": "Fiction",
+    "quantity": 3,
+    "rating": 4.8,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "A gripping tale of racial injustice and childhood innocence in the American South, told through the eyes of Scout Finch."
+  },
+  {
+    "id": 3,
+    "name": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "quantity": 7,
+    "rating": 4.3,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "An accessible exploration of cosmology, black holes, and the nature of time and space by one of the world's greatest physicists."
+  },
+  {
+    "id": 4,
+    "name": "The Art of War",
+    "author": "Sun Tzu",
+    "category": "Philosophy",
+    "quantity": 4,
+    "rating": 4.2,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "Ancient Chinese military treatise offering timeless strategies and wisdom applicable to warfare, business, and life."
+  },
+  {
+    "id": 5,
+    "name": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "category": "Romance",
+    "quantity": 6,
+    "rating": 4.6,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "A witty and romantic novel about Elizabeth Bennet and Mr. Darcy, exploring themes of love, class, and social expectations."
+  },
+  {
+    "id": 6,
+    "name": "1984",
+    "author": "George Orwell",
+    "category": "Fiction",
+    "quantity": 2,
+    "rating": 4.7,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "A dystopian masterpiece depicting a totalitarian society where independent thought is criminalized."
+  },
+  {
+    "id": 7,
+    "name": "The Origin of Species",
+    "author": "Charles Darwin",
+    "category": "Science",
+    "quantity": 3,
+    "rating": 4.1,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "Groundbreaking scientific work that introduced the theory of evolution and natural selection."
+  },
+  {
+    "id": 8,
+    "name": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "quantity": 5,
+    "rating": 4.4,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "Personal reflections of the Roman Emperor on Stoic philosophy, virtue, and the nature of human existence."
+  },
+  {
+    "id": 9,
+    "name": "Jane Eyre",
+    "author": "Charlotte Brontë",
+    "category": "Romance",
+    "quantity": 4,
+    "rating": 4.5,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "The story of an orphaned governess who faces hardship and finds love, embodying themes of independence and equality."
+  },
+  {
+    "id": 10,
+    "name": "Wuthering Heights",
+    "author": "Emily Brontë",
+    "category": "Romance",
+    "quantity": 0,
+    "rating": 4.0,
+    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "description": "A passionate and turbulent tale of love and revenge set on the Yorkshire moors."
+  }
+]
