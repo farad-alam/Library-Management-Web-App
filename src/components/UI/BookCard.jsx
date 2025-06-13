@@ -75,7 +75,7 @@ const BookCard = ({ book, showActions = false, onUpdate }) => {
         {/* Actions */}
         <div className="flex items-center justify-between">
           <Link
-            to={`/book/${book.id}`}
+            to={`/book/${book._id}`}
             className="flex items-center space-x-1 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
           >
             <Eye className="h-4 w-4" />

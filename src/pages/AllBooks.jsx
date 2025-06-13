@@ -215,7 +215,7 @@ const AllBooks = () => {
             >
               {filteredBooks.map((book) => (
                 <BookCard
-                  key={book.id}
+                  key={book._id}
                   book={book}
                   showActions={true}
                   onUpdate={handleUpdateBook}
