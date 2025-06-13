@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import singleBookApi from '../api/singleBookApi';
 
 const DataContext = createContext(undefined);
 
@@ -45,6 +46,13 @@ export const DataProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
+
+  const singleBook = (book_id)=>{
+    setIsLoading(true)
+    return singleBookApi(book_id).finally(()=>{
+      setIsLoading(false)
+    })
+  }
 
   const addBook = (newBook) => {
     const book = {
@@ -116,6 +124,7 @@ export const DataProvider = ({ children }) => {
     borrowBook,
     returnBook,
     isLoading,
+    singleBook,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

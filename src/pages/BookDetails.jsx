@@ -1,21 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Calendar, User, Tag, Package, Star, ArrowLeft, BookOpen } from 'lucide-react';
-import ReactStars from 'react-rating-stars-component';
-import { useForm } from 'react-hook-form';
-import { useData } from '../contexts/DataContext';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  Calendar,
+  User,
+  Tag,
+  Package,
+  Star,
+  ArrowLeft,
+  BookOpen,
+} from "lucide-react";
+import ReactStars from "react-rating-stars-component";
+import { useForm } from "react-hook-form";
+import { useData } from "../contexts/DataContext";
 // import { useAuth } from '../contexts/AuthContext';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import Swal from 'sweetalert2';
-import useAuth from '../hooks/useAuth';
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
+import singleBookApi from "../api/singleBookApi";
 
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { books, borrowedBooks, borrowBook } = useData();
+  const { books, borrowedBooks, borrowBook, singleBook, isLoading } = useData();
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [book, setBook] = useState({});
 
   const {
     register,
@@ -24,16 +34,28 @@ const BookDetails = () => {
     reset,
   } = useForm();
 
-  const book = books.find(b => b.id === parseInt(id || '0'));
-  const userBorrowedBooks = borrowedBooks.filter(bb => bb.userId === user?.id);
-  const hasAlreadyBorrowed = userBorrowedBooks.some(bb => bb.bookId === book?.id);
+  useEffect(() => {
+    singleBook(id)
+      .then((data) => setBook(data))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [id]);
+
+  // const book = books.find(b => b._id === parseInt(id || '0'));
+  const userBorrowedBooks = borrowedBooks.filter(
+    (bb) => bb.userId === user?.id
+  );
+  const hasAlreadyBorrowed = userBorrowedBooks.some(
+    (bb) => bb.bookId === book?.id
+  );
   const hasReachedLimit = userBorrowedBooks.length >= 3;
 
   useEffect(() => {
     if (book) {
       document.title = `${book.name} - LibraryHub`;
     } else {
-      document.title = 'Book Not Found - LibraryHub';
+      document.title = "Book Not Found - LibraryHub";
     }
   }, [book]);
 
@@ -41,10 +63,14 @@ const BookDetails = () => {
     return (
       <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Book Not Found</h1>
-          <p className="text-gray-600 mb-6">The book you're looking for doesn't exist.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Book Not Found
+          </h1>
+          <p className="text-gray-600 mb-6">
+            The book you're looking for doesn't exist.
+          </p>
           <button
-            onClick={() => navigate('/books')}
+            onClick={() => navigate("/books")}
             className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
           >
             Back to Books
@@ -59,27 +85,27 @@ const BookDetails = () => {
 
     if (hasAlreadyBorrowed) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Already Borrowed',
-        text: 'You have already borrowed this book.',
+        icon: "warning",
+        title: "Already Borrowed",
+        text: "You have already borrowed this book.",
       });
       return;
     }
 
     if (hasReachedLimit) {
       Swal.fire({
-        icon: 'warning',
-        title: 'Borrowing Limit Reached',
-        text: 'You can only borrow up to 3 books at a time. Please return a book first.',
+        icon: "warning",
+        title: "Borrowing Limit Reached",
+        text: "You can only borrow up to 3 books at a time. Please return a book first.",
       });
       return;
     }
 
     if (book.quantity <= 0) {
       Swal.fire({
-        icon: 'error',
-        title: 'Book Unavailable',
-        text: 'This book is currently out of stock.',
+        icon: "error",
+        title: "Book Unavailable",
+        text: "This book is currently out of stock.",
       });
       return;
     }
@@ -89,9 +115,13 @@ const BookDetails = () => {
     reset();
 
     Swal.fire({
-      icon: 'success',
-      title: 'Book Borrowed Successfully!',
-      text: `You have successfully borrowed "${book.name}". Please return it by ${new Date(data.returnDate).toLocaleDateString()}.`,
+      icon: "success",
+      title: "Book Borrowed Successfully!",
+      text: `You have successfully borrowed "${
+        book.name
+      }". Please return it by ${new Date(
+        data.returnDate
+      ).toLocaleDateString()}.`,
       timer: 3000,
       showConfirmButton: false,
     });
@@ -100,17 +130,21 @@ const BookDetails = () => {
   const getMinReturnDate = () => {
     const today = new Date();
     today.setDate(today.getDate() + 1); // Minimum 1 day from today
-    return today.toISOString().split('T')[0];
+    return today.toISOString().split("T")[0];
   };
 
   const getMaxReturnDate = () => {
     const today = new Date();
     today.setDate(today.getDate() + 30); // Maximum 30 days from today
-    return today.toISOString().split('T')[0];
+    return today.toISOString().split("T")[0];
   };
 
-  const canBorrow = book.quantity > 0 && !hasAlreadyBorrowed && !hasReachedLimit;
+  const canBorrow =
+    book.quantity > 0 && !hasAlreadyBorrowed && !hasReachedLimit;
 
+  if (isLoading) {
+    return <LoadingSpinner text="Loading books..." />;
+  }
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -140,14 +174,18 @@ const BookDetails = () => {
                 alt={book.name}
                 className="w-full max-w-md h-auto rounded-2xl shadow-2xl"
               />
-              <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
-                book.quantity === 0 
-                  ? 'bg-red-500 text-white' 
-                  : book.quantity <= 2 
-                    ? 'bg-yellow-500 text-white' 
-                    : 'bg-green-500 text-white'
-              }`}>
-                {book.quantity === 0 ? 'Out of Stock' : `${book.quantity} available`}
+              <div
+                className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
+                  book.quantity === 0
+                    ? "bg-red-500 text-white"
+                    : book.quantity <= 2
+                    ? "bg-yellow-500 text-white"
+                    : "bg-green-500 text-white"
+                }`}
+              >
+                {book.quantity === 0
+                  ? "Out of Stock"
+                  : `${book.quantity} available`}
               </div>
             </div>
           </motion.div>
@@ -163,11 +201,13 @@ const BookDetails = () => {
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 {book.name}
               </h1>
-              
+
               <div className="flex items-center space-x-4 mb-6">
                 <div className="flex items-center space-x-2">
                   <User className="h-5 w-5 text-gray-500" />
-                  <span className="text-lg text-gray-700">by {book.author}</span>
+                  <span className="text-lg text-gray-700">
+                    by {book.author}
+                  </span>
                 </div>
               </div>
 
@@ -178,10 +218,12 @@ const BookDetails = () => {
                     {book.category}
                   </span>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <Package className="h-5 w-5 text-gray-500" />
-                  <span className="text-gray-700">{book.quantity} copies available</span>
+                  <span className="text-gray-700">
+                    {book.quantity} copies available
+                  </span>
                 </div>
               </div>
 
@@ -195,13 +237,17 @@ const BookDetails = () => {
                   activeColor="#F59E0B"
                   color="#E5E7EB"
                 />
-                <span className="text-lg font-medium text-gray-700">({book.rating})</span>
+                <span className="text-lg font-medium text-gray-700">
+                  ({book.rating})
+                </span>
               </div>
             </div>
 
             {/* Description */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Description</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Description
+              </h3>
               <p className="text-gray-700 leading-relaxed">
                 {book.description}
               </p>
@@ -209,30 +255,36 @@ const BookDetails = () => {
 
             {/* Borrow Section */}
             <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Borrow This Book</h3>
-              
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Borrow This Book
+              </h3>
+
               {hasAlreadyBorrowed ? (
                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
                   <p className="text-yellow-800">
-                    You have already borrowed this book. Check your borrowed books to see the return date.
+                    You have already borrowed this book. Check your borrowed
+                    books to see the return date.
                   </p>
                 </div>
               ) : hasReachedLimit ? (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   <p className="text-red-800">
-                    You have reached the maximum borrowing limit of 3 books. Please return a book first.
+                    You have reached the maximum borrowing limit of 3 books.
+                    Please return a book first.
                   </p>
                 </div>
               ) : book.quantity <= 0 ? (
                 <div className="bg-red-50 border border-red-200 rounded-lg p-4">
                   <p className="text-red-800">
-                    This book is currently out of stock. Please check back later.
+                    This book is currently out of stock. Please check back
+                    later.
                   </p>
                 </div>
               ) : (
                 <div>
                   <p className="text-gray-600 mb-4">
-                    Borrow this book for up to 30 days. You can borrow up to 3 books at a time.
+                    Borrow this book for up to 30 days. You can borrow up to 3
+                    books at a time.
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -249,7 +301,9 @@ const BookDetails = () => {
 
             {/* Additional Info */}
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-              <h4 className="font-semibold text-blue-900 mb-2">Borrowing Guidelines</h4>
+              <h4 className="font-semibold text-blue-900 mb-2">
+                Borrowing Guidelines
+              </h4>
               <ul className="text-sm text-blue-800 space-y-1">
                 <li>• Maximum borrowing period: 30 days</li>
                 <li>• Maximum books per user: 3 books</li>
@@ -276,8 +330,10 @@ const BookDetails = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Borrow Book</h2>
-              
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Borrow Book
+              </h2>
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -285,7 +341,7 @@ const BookDetails = () => {
                   </label>
                   <input
                     type="text"
-                    value={user?.name || ''}
+                    value={user?.name || ""}
                     disabled
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
@@ -297,7 +353,7 @@ const BookDetails = () => {
                   </label>
                   <input
                     type="email"
-                    value={user?.email || ''}
+                    value={user?.email || ""}
                     disabled
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
@@ -310,19 +366,21 @@ const BookDetails = () => {
                   <div className="relative">
                     <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input
-                      {...register('returnDate', {
-                        required: 'Return date is required',
+                      {...register("returnDate", {
+                        required: "Return date is required",
                       })}
                       type="date"
                       min={getMinReturnDate()}
                       max={getMaxReturnDate()}
                       className={`w-full pl-10 pr-3 py-2 border ${
-                        errors.returnDate ? 'border-red-300' : 'border-gray-300'
+                        errors.returnDate ? "border-red-300" : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent`}
                     />
                   </div>
                   {errors.returnDate && (
-                    <p className="mt-1 text-sm text-red-600">{errors.returnDate.message}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.returnDate.message}
+                    </p>
                   )}
                   <p className="mt-1 text-xs text-gray-500">
                     You can borrow for 1-30 days from today
