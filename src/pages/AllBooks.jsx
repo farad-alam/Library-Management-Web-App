@@ -6,9 +6,13 @@ import BookCard from '../components/UI/BookCard';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import allBooksApi from '../api/allBooksApi';
 
 const AllBooks = () => {
-  const { books, isLoading, updateBook } = useData();
+  const {updateBook } = useData();
+
+  const [isLoading, setisLoading] = useState(false);
+  const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
@@ -19,6 +23,19 @@ const AllBooks = () => {
   useEffect(() => {
     document.title = 'All Books - LibraryHub';
   }, []);
+
+  useEffect(()=>{
+    setisLoading(true)
+    const unsubscribe = allBooksApi().then( (data) => {
+      setBooks(data)
+      setisLoading(false);
+    }
+    ).catch(err =>{
+      setisLoading(false);
+      console.error("can not load books", err)
+    })
+    
+  },[])
 
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

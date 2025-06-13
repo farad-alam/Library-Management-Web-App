@@ -3,28 +3,28 @@
     "id": 1,
     "name": "Fiction",
     "description": "Immerse yourself in captivating stories and imaginative worlds",
-    "image": "https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "image": "https://images.newscientist.com/wp-content/uploads/2024/05/24140958/sei204548736.png",
     "bookCount": 25
   },
   {
     "id": 2,
     "name": "Science",
     "description": "Explore the wonders of scientific discovery and innovation",
-    "image": "https://images.pexels.com/photos/1319854/pexels-photo-1319854.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "image": "https://i0.wp.com/www.sciencenews.org/wp-content/uploads/2022/12/2022FavBookCovers.jpg",
     "bookCount": 18
   },
   {
     "id": 3,
     "name": "Philosophy",
     "description": "Delve into profound questions about existence and meaning",
-    "image": "https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "image": "https://miro.medium.com/v2/resize:fit:800/1*naQjGlsBqmkG3bOVrXtiXQ.jpeg",
     "bookCount": 12
   },
   {
     "id": 4,
     "name": "Romance",
     "description": "Experience love stories that touch the heart and soul",
-    "image": "https://images.pexels.com/photos/1319854/pexels-photo-1319854.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "image": "https://wizdomapp.com/wp-content/uploads/2024/09/Books-803x484.png",
     "bookCount": 20
   }
 ]
