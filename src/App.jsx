@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
+// import { AuthProvider } from './contexts/AuthContext';
 import { DataProvider } from './contexts/DataContext';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
@@ -14,11 +14,12 @@ import Register from './pages/Register';
 import CategoryBooks from './pages/CategoryBooks';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
+import FirebaseAuthProvider from './contexts/FirebaseAuthProvider';
 
 function App() {
   return (
     <Router>
-      <AuthProvider>
+      <FirebaseAuthProvider>
         <DataProvider>
           <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             <Navbar />
@@ -27,32 +28,47 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/category/:categoryName" element={<CategoryBooks />} />
-                
-                <Route path="/books" element={
-                  <ProtectedRoute>
-                    <AllBooks />
-                  </ProtectedRoute>
-                } />
-                
-                <Route path="/add-book" element={
-                  <ProtectedRoute>
-                    <AddBook />
-                  </ProtectedRoute>
-                } />
-                
-                <Route path="/borrowed-books" element={
-                  <ProtectedRoute>
-                    <BorrowedBooks />
-                  </ProtectedRoute>
-                } />
-                
-                <Route path="/book/:id" element={
-                  <ProtectedRoute>
-                    <BookDetails />
-                  </ProtectedRoute>
-                } />
-                
+                <Route
+                  path="/category/:categoryName"
+                  element={<CategoryBooks />}
+                />
+
+                <Route
+                  path="/books"
+                  element={
+                    <ProtectedRoute>
+                      <AllBooks />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/add-book"
+                  element={
+                    <ProtectedRoute>
+                      <AddBook />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/borrowed-books"
+                  element={
+                    <ProtectedRoute>
+                      <BorrowedBooks />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path="/book/:id"
+                  element={
+                    <ProtectedRoute>
+                      <BookDetails />
+                    </ProtectedRoute>
+                  }
+                />
+
                 <Route path="/404" element={<NotFound />} />
                 <Route path="*" element={<Navigate to="/404" replace />} />
               </Routes>
@@ -60,7 +76,7 @@ function App() {
             <Footer />
           </div>
         </DataProvider>
-      </AuthProvider>
+      </FirebaseAuthProvider>
     </Router>
   );
 }

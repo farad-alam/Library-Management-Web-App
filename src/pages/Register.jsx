@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { User, Mail, Lock, Eye, EyeOff, UserPlus, Image } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+// import { useAuth } from '../contexts/AuthContext';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);

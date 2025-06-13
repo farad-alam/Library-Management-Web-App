@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, RotateCcw, BookOpen, Clock } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
-import { useAuth } from '../contexts/AuthContext';
+// import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const BorrowedBooks = () => {
   const { borrowedBooks, returnBook, isLoading } = useData();

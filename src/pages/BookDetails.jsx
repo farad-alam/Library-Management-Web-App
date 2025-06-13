@@ -5,9 +5,10 @@ import { Calendar, User, Tag, Package, Star, ArrowLeft, BookOpen } from 'lucide-
 import ReactStars from 'react-rating-stars-component';
 import { useForm } from 'react-hook-form';
 import { useData } from '../contexts/DataContext';
-import { useAuth } from '../contexts/AuthContext';
+// import { useAuth } from '../contexts/AuthContext';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import Swal from 'sweetalert2';
+import useAuth from '../hooks/useAuth';
 
 const BookDetails = () => {
   const { id } = useParams();

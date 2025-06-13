@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Menu, X, User, LogOut } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
+// import { useAuth } from '../../contexts/AuthContext';
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth()
   const location = useLocation();
 
   useEffect(() => {
