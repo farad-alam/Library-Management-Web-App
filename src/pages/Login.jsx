@@ -73,7 +73,7 @@ const Login = () => {
         text:
           error instanceof Error
             ? error.message
-            : "An error occurred during login",
+            : "An error occurred during login with google",
       });
     }
     
