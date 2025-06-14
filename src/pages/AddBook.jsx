@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const AddBook = () => {
-  const { addBook, books, loadBooks, isLoading } = useData();
+  const { addBook, books, loadBooks, categories, isLoading } = useData();
   
   const {
     register,
@@ -20,7 +20,7 @@ const AddBook = () => {
     document.title = 'Add Book - LibraryHub';
   }, []);
 
-  const categories = [...new Set(books.map(book => book.category))];
+  // const categories = [...new Set(books.map(book => book.category))];
 
   const onSubmit = async (data) => {
     try {
@@ -146,8 +146,8 @@ const AddBook = () => {
                     >
                       <option value="">Select Category</option>
                       {categories.map((category) => (
-                        <option key={category} value={category}>
-                          {category}
+                        <option key={category} value={category.name}>
+                          {category.name}
                         </option>
                       ))}
                       <option value="History">History</option>
@@ -366,10 +366,10 @@ const AddBook = () => {
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
                   <span
-                    key={category}
+                    key={category._id}
                     className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
                   >
-                    {category}
+                    {category.name}
                   </span>
                 ))}
               </div>

@@ -3,6 +3,7 @@ import singleBookApi from "../api/singleBookApi";
 import updateBookApi from "../api/updateBookApi";
 import allBooksApi from "../api/allBooksApi";
 import addBookApi from "../api/addBookApi";
+import categoryApi from "../api/categoryApi";
 
 const DataContext = createContext(undefined);
 
@@ -35,9 +36,10 @@ export const DataProvider = ({ children }) => {
       // setBooks(booksData);
 
       // Load categories
-      const categoriesResponse = await fetch("/categories.json");
-      const categoriesData = await categoriesResponse.json();
-      setCategories(categoriesData);
+      categoryApi().then(res => setCategories(res))
+      // const categoriesResponse = await fetch("/categories.json");
+      // const categoriesData = await categoriesResponse.json();
+      // setCategories(categoriesData);
 
       // Load borrowed books from localStorage
       const storedBorrowedBooks = localStorage.getItem("borrowedBooks");
@@ -57,6 +59,15 @@ export const DataProvider = ({ children }) => {
       .then((data) => setBooks(data))
       .finally(() => setIsLoading(false));
   };
+
+  const loadCategories = ()=>{
+    setIsLoading(true)
+    return categoryApi().then((res) => setCategories(res))
+    .finally(() => {
+      setIsLoading(false)
+    })
+    
+  }
 
   const singleBook = (book_id) => {
     setIsLoading(true);
@@ -140,6 +151,7 @@ export const DataProvider = ({ children }) => {
     isLoading,
     singleBook,
     loadBooks,
+    loadCategories,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
