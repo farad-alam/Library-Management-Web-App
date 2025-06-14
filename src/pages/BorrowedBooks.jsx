@@ -53,7 +53,7 @@ const BorrowedBooks = () => {
 
   // const userBorrowedBooks = borrowedBooks.filter(bb => bb.userId === user?.id);
 
-  const handleReturnBook = (borrowId, bookTitle) => {
+  const handleReturnBook = (borrowId, borrowBookId, bookTitle) => {
     Swal.fire({
       title: 'Return Book?',
       text: `Are you sure you want to return "${bookTitle}"?`,
@@ -65,7 +65,7 @@ const BorrowedBooks = () => {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        returnBook(borrowId);
+        returnBook(borrowId, borrowBookId);
         Swal.fire({
           icon: 'success',
           title: 'Book Returned!',
@@ -291,8 +291,9 @@ const BorrowedBooks = () => {
                       whileTap={{ scale: 0.98 }}
                       onClick={() =>
                         handleReturnBook(
-                          borrowedBook.id,
-                          borrowedBook.book.name
+                          borrowedBook._id,
+                          borrowedBook.book._id,
+                          borrowedBook.book.name,
                         )
                       }
                       className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors font-medium"

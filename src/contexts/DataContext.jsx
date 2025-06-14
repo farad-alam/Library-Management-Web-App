@@ -7,6 +7,7 @@ import categoryApi from "../api/categoryApi";
 import addBorrowBookApi from "../api/addBorrowBookApi";
 import getBorrowedBooksByUserIdApi from "../api/getBorrowedBooksByUserIdApi";
 import useAuth from "../hooks/useAuth";
+import removeBorrowBook from "../api/removeBorrowBook";
 
 const DataContext = createContext(undefined);
 
@@ -106,7 +107,8 @@ export const DataProvider = ({ children }) => {
     };
 
     return addBorrowBookApi(borrowBookDetails).finally(() => {
-      setIsLoading(false)
+      setIsLoading(false),
+      setBorrowBook()
     })
 
     // const book = books.find((b) => b.id === bookId);
@@ -150,22 +152,25 @@ export const DataProvider = ({ children }) => {
     })
   }
 
-  const returnBook = (borrowId) => {
-    const borrowedBook = borrowedBooks.find((bb) => bb.id === borrowId);
-    if (!borrowedBook) return;
-
-    // Remove from borrowed books
-    const updatedBorrowedBooks = borrowedBooks.filter(
-      (bb) => bb.id !== borrowId
+  const returnBook = (borrowId, borrowBookId) => {
+    return removeBorrowBook(borrowId, borrowBookId).then((data) =>
+      setBorrowBook()
     );
-    setBorrowedBooks(updatedBorrowedBooks);
-    localStorage.setItem("borrowedBooks", JSON.stringify(updatedBorrowedBooks));
+    // const borrowedBook = borrowedBooks.find((bb) => bb.id === borrowId);
+    // if (!borrowedBook) return;
 
-    // Increase book quantity
-    const book = books.find((b) => b.id === borrowedBook.bookId);
-    if (book) {
-      updateBook(borrowedBook.bookId, { quantity: book.quantity + 1 });
-    }
+    // // Remove from borrowed books
+    // const updatedBorrowedBooks = borrowedBooks.filter(
+    //   (bb) => bb.id !== borrowId
+    // );
+    // setBorrowedBooks(updatedBorrowedBooks);
+    // localStorage.setItem("borrowedBooks", JSON.stringify(updatedBorrowedBooks));
+
+    // // Increase book quantity
+    // const book = books.find((b) => b.id === borrowedBook.bookId);
+    // if (book) {
+    //   updateBook(borrowedBook.bookId, { quantity: book.quantity + 1 });
+    // }
   };
 
   const value = {

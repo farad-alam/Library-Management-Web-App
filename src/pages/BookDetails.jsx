@@ -22,7 +22,14 @@ import singleBookApi from "../api/singleBookApi";
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { books, borrowedBooks, borrowBook, singleBook, isLoading } = useData();
+  const {
+    books,
+    borrowedBooks,
+    borrowBook,
+    singleBook,
+    isLoading,
+    setBorrowBook,
+  } = useData();
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [book, setBook] = useState({});
@@ -40,14 +47,12 @@ const BookDetails = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [id]);
-console.log(user.uid);
-  // const book = books.find(b => b._id === parseInt(id || '0'));
-  // const userBorrowedBooks = borrowedBooks.filter(
-  //   (bb) => bb.userId === user?.uid
-  // );
-  const hasAlreadyBorrowed = borrowedBooks.some((bb) => bb.bookId === book?.id);
-  const hasReachedLimit = borrowedBooks.length >= 3;
+  }, [id, borrowedBooks]);
+// console.log(user);
+
+  const hasAlreadyBorrowed = borrowedBooks.some((bb) => bb.bookId === book?._id);
+  // const hasReachedLimit = borrowedBooks.length >= 3;
+  const hasReachedLimit = false
 
   useEffect(() => {
     if (book) {
@@ -55,6 +60,7 @@ console.log(user.uid);
     } else {
       document.title = "Book Not Found - LibraryHub";
     }
+    // setBorrowBook()
   }, [book]);
 
   if (!book) {
@@ -111,6 +117,7 @@ console.log(user.uid);
     borrowBook(book._id, user.uid, data.returnDate);
     setIsModalOpen(false);
     reset();
+    setBorrowBook()
 
     Swal.fire({
       icon: "success",
@@ -339,7 +346,7 @@ console.log(user.uid);
                   </label>
                   <input
                     type="text"
-                    value={user?.name || ""}
+                    value={user?.displayName || ""}
                     disabled
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
