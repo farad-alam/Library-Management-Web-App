@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const {user} = useAuth()
+  const { user, isLoading: authisLoading } = useAuth();
 
   useEffect(() => {
     loadData();
@@ -46,7 +46,9 @@ export const DataProvider = ({ children }) => {
       // setCategories(categoriesData);
 
       // Load borrowed books from localStorage ----------->>>>>>>>
-      getBorrowedBooksByUserIdApi(user.uid).then(data => setBorrowedBooks(data))
+      if (!authisLoading) {
+        getBorrowedBooksByUserIdApi(user.uid).then(data => setBorrowedBooks(data))
+      }
       // const storedBorrowedBooks = localStorage.getItem("borrowedBooks");
       // if (storedBorrowedBooks) {
       //   setBorrowedBooks(JSON.parse(storedBorrowedBooks));
@@ -139,6 +141,15 @@ export const DataProvider = ({ children }) => {
     // updateBook(bookId, { quantity: book.quantity - 1 });
   };
 
+  const setBorrowBook = ()=>{
+    setIsLoading(true)
+    return getBorrowedBooksByUserIdApi(user.uid).then((data) =>
+      setBorrowedBooks(data)
+    ).finally(() => {
+      setIsLoading(false)
+    })
+  }
+
   const returnBook = (borrowId) => {
     const borrowedBook = borrowedBooks.find((bb) => bb.id === borrowId);
     if (!borrowedBook) return;
@@ -169,6 +180,7 @@ export const DataProvider = ({ children }) => {
     singleBook,
     loadBooks,
     loadCategories,
+    setBorrowBook,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

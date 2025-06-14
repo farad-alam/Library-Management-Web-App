@@ -4,7 +4,6 @@ function getBorrowedBooksByUserIdApi(userId) {
   return axios
     .get(
       `${import.meta.env.VITE_SERVER_URL}/book/borrowed-books/${userId}`,
-      borrowBookData
     )
     .then((res) => res.data)
     .catch((err) => {

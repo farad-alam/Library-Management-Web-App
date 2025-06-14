@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, RotateCcw, BookOpen, Clock } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
@@ -6,16 +6,52 @@ import { useData } from '../contexts/DataContext';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
+import singleBookApi from '../api/singleBookApi';
 
 const BorrowedBooks = () => {
-  const { borrowedBooks, returnBook, isLoading } = useData();
-  const { user } = useAuth();
+  const {
+    borrowedBooks :userBorrowedBooks,
+    returnBook,
+    isLoading,
+    setBorrowBook,
+    books
+  } = useData();
+  // const [userBorrowedBooks, setuserBorrowedBooks] = useState([])
+  const [borrowedBookWithBookDetails, setBorrowedBookWithBookDetails] = useState([])
+  const { user, } = useAuth();
+  const [isDataLoading, setIsDataLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Borrowed Books - LibraryHub';
-  }, []);
+    document.title = "Borrowed Books - LibraryHub";
 
-  const userBorrowedBooks = borrowedBooks.filter(bb => bb.userId === user?.id);
+    const fetchBorrowedBooks = async () => {
+
+      const bookDetails = await Promise.all(
+        userBorrowedBooks.map(async (book, index) => {
+          const bookdata = await singleBookApi(book.bookId);
+          return {
+            ...book,
+            book: bookdata,
+          };
+        })
+      );
+
+      setBorrowedBookWithBookDetails(bookDetails);
+      setIsDataLoading(false)
+    };
+
+    if (user) {
+      fetchBorrowedBooks();
+    }
+  },[user, userBorrowedBooks]);
+
+  useEffect(() => {
+    if (user) {
+      setBorrowBook(); // This sets userBorrowedBooks
+    }
+  }, [user]);
+
+  // const userBorrowedBooks = borrowedBooks.filter(bb => bb.userId === user?.id);
 
   const handleReturnBook = (borrowId, bookTitle) => {
     Swal.fire({
@@ -61,7 +97,7 @@ const BorrowedBooks = () => {
     return diffDays;
   };
 
-  if (isLoading) {
+  if (isLoading || isDataLoading) {
     return <LoadingSpinner text="Loading your borrowed books..." />;
   }
 
@@ -101,8 +137,12 @@ const BorrowedBooks = () => {
                 <BookOpen className="h-6 w-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Borrowed</p>
-                <p className="text-2xl font-bold text-gray-900">{userBorrowedBooks.length}</p>
+                <p className="text-sm font-medium text-gray-600">
+                  Total Borrowed
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {userBorrowedBooks.length}
+                </p>
               </div>
             </div>
           </div>
@@ -115,7 +155,10 @@ const BorrowedBooks = () => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">On Time</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {userBorrowedBooks.filter(bb => !isOverdue(bb.returnDate)).length}
+                  {
+                    userBorrowedBooks.filter((bb) => !isOverdue(bb.returnDate))
+                      .length
+                  }
                 </p>
               </div>
             </div>
@@ -129,7 +172,10 @@ const BorrowedBooks = () => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Overdue</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {userBorrowedBooks.filter(bb => isOverdue(bb.returnDate)).length}
+                  {
+                    userBorrowedBooks.filter((bb) => isOverdue(bb.returnDate))
+                      .length
+                  }
                 </p>
               </div>
             </div>
@@ -150,7 +196,8 @@ const BorrowedBooks = () => {
                 No Borrowed Books
               </h3>
               <p className="text-gray-600 mb-6">
-                You haven't borrowed any books yet. Start exploring our collection!
+                You haven't borrowed any books yet. Start exploring our
+                collection!
               </p>
               <a
                 href="/books"
@@ -162,10 +209,14 @@ const BorrowedBooks = () => {
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {userBorrowedBooks.map((borrowedBook, index) => {
-              const daysUntilReturn = getDaysUntilReturn(borrowedBook.returnDate);
+            {/* change orginal */}
+            {borrowedBookWithBookDetails.map((borrowedBook, index) => {
+              const daysUntilReturn = getDaysUntilReturn(
+                borrowedBook.returnDate
+              );
               const overdue = isOverdue(borrowedBook.returnDate);
-              
+              console.log(borrowedBook);
+
               return (
                 <motion.div
                   key={borrowedBook.id}
@@ -181,19 +232,20 @@ const BorrowedBooks = () => {
                       alt={borrowedBook.book.name}
                       className="w-full h-48 object-cover"
                     />
-                    <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
-                      overdue 
-                        ? 'bg-red-500 text-white' 
-                        : daysUntilReturn <= 3 
-                          ? 'bg-yellow-500 text-white' 
-                          : 'bg-green-500 text-white'
-                    }`}>
-                      {overdue 
-                        ? `${Math.abs(daysUntilReturn)} days overdue` 
-                        : daysUntilReturn === 0 
-                          ? 'Due today' 
-                          : `${daysUntilReturn} days left`
-                      }
+                    <div
+                      className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
+                        overdue
+                          ? "bg-red-500 text-white"
+                          : daysUntilReturn <= 3
+                          ? "bg-yellow-500 text-white"
+                          : "bg-green-500 text-white"
+                      }`}
+                    >
+                      {overdue
+                        ? `${Math.abs(daysUntilReturn)} days overdue`
+                        : daysUntilReturn === 0
+                        ? "Due today"
+                        : `${daysUntilReturn} days left`}
                     </div>
                   </div>
 
@@ -210,13 +262,19 @@ const BorrowedBooks = () => {
                     <div className="space-y-2 mb-6">
                       <div className="flex items-center text-sm text-gray-600">
                         <Calendar className="h-4 w-4 mr-2" />
-                        <span>Borrowed: {formatDate(borrowedBook.borrowDate)}</span>
+                        <span>
+                          Borrowed: {formatDate(borrowedBook.borrowDate)}
+                        </span>
                       </div>
-                      <div className={`flex items-center text-sm ${
-                        overdue ? 'text-red-600' : 'text-gray-600'
-                      }`}>
+                      <div
+                        className={`flex items-center text-sm ${
+                          overdue ? "text-red-600" : "text-gray-600"
+                        }`}
+                      >
                         <Clock className="h-4 w-4 mr-2" />
-                        <span>Return by: {formatDate(borrowedBook.returnDate)}</span>
+                        <span>
+                          Return by: {formatDate(borrowedBook.returnDate)}
+                        </span>
                       </div>
                     </div>
 
@@ -231,7 +289,12 @@ const BorrowedBooks = () => {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => handleReturnBook(borrowedBook.id, borrowedBook.book.name)}
+                      onClick={() =>
+                        handleReturnBook(
+                          borrowedBook.id,
+                          borrowedBook.book.name
+                        )
+                      }
                       className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors font-medium"
                     >
                       <RotateCcw className="h-4 w-4" />
@@ -262,13 +325,18 @@ const BorrowedBooks = () => {
                 </h3>
                 <div className="mt-2 text-sm text-blue-700">
                   <p>
-                    You have borrowed {userBorrowedBooks.length} out of 3 maximum books allowed. 
+                    You have borrowed {userBorrowedBooks.length} out of 3
+                    maximum books allowed.
                     {userBorrowedBooks.length >= 3 && (
-                      <span className="font-medium"> You've reached your borrowing limit.</span>
+                      <span className="font-medium">
+                        {" "}
+                        You've reached your borrowing limit.
+                      </span>
                     )}
                   </p>
                   <p className="mt-1">
-                    Remember to return books on time to avoid late fees and maintain your borrowing privileges.
+                    Remember to return books on time to avoid late fees and
+                    maintain your borrowing privileges.
                   </p>
                 </div>
               </div>
