@@ -41,15 +41,13 @@ const BookDetails = () => {
         console.error(err);
       });
   }, [id]);
-
+console.log(user.uid);
   // const book = books.find(b => b._id === parseInt(id || '0'));
-  const userBorrowedBooks = borrowedBooks.filter(
-    (bb) => bb.userId === user?.id
-  );
-  const hasAlreadyBorrowed = userBorrowedBooks.some(
-    (bb) => bb.bookId === book?.id
-  );
-  const hasReachedLimit = userBorrowedBooks.length >= 3;
+  // const userBorrowedBooks = borrowedBooks.filter(
+  //   (bb) => bb.userId === user?.uid
+  // );
+  const hasAlreadyBorrowed = borrowedBooks.some((bb) => bb.bookId === book?.id);
+  const hasReachedLimit = borrowedBooks.length >= 3;
 
   useEffect(() => {
     if (book) {
@@ -110,7 +108,7 @@ const BookDetails = () => {
       return;
     }
 
-    borrowBook(book.id, user.id, data.returnDate);
+    borrowBook(book._id, user.uid, data.returnDate);
     setIsModalOpen(false);
     reset();
 

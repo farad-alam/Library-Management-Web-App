@@ -4,6 +4,9 @@ import updateBookApi from "../api/updateBookApi";
 import allBooksApi from "../api/allBooksApi";
 import addBookApi from "../api/addBookApi";
 import categoryApi from "../api/categoryApi";
+import addBorrowBookApi from "../api/addBorrowBookApi";
+import getBorrowedBooksByUserIdApi from "../api/getBorrowedBooksByUserIdApi";
+import useAuth from "../hooks/useAuth";
 
 const DataContext = createContext(undefined);
 
@@ -20,6 +23,7 @@ export const DataProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const {user} = useAuth()
 
   useEffect(() => {
     loadData();
@@ -29,23 +33,24 @@ export const DataProvider = ({ children }) => {
     try {
       setIsLoading(true);
 
-      // Load books
+      // Load books ----------->>>>>>>>
       allBooksApi().then((data) => setBooks(data));
       // const booksResponse = await fetch('/books.json');
       // const booksData = await booksResponse.json();
       // setBooks(booksData);
 
-      // Load categories
-      categoryApi().then(res => setCategories(res))
+      // Load categories ----------->>>>>>>>
+      categoryApi().then((res) => setCategories(res));
       // const categoriesResponse = await fetch("/categories.json");
       // const categoriesData = await categoriesResponse.json();
       // setCategories(categoriesData);
 
-      // Load borrowed books from localStorage
-      const storedBorrowedBooks = localStorage.getItem("borrowedBooks");
-      if (storedBorrowedBooks) {
-        setBorrowedBooks(JSON.parse(storedBorrowedBooks));
-      }
+      // Load borrowed books from localStorage ----------->>>>>>>>
+      getBorrowedBooksByUserIdApi(user.uid).then(data => setBorrowedBooks(data))
+      // const storedBorrowedBooks = localStorage.getItem("borrowedBooks");
+      // if (storedBorrowedBooks) {
+      //   setBorrowedBooks(JSON.parse(storedBorrowedBooks));
+      // }
     } catch (error) {
       console.error("Error loading data:", error);
     } finally {
@@ -90,36 +95,48 @@ export const DataProvider = ({ children }) => {
   };
 
   const borrowBook = (bookId, userId, returnDate) => {
-    const book = books.find((b) => b.id === bookId);
-    if (!book || book.quantity <= 0) return;
-
-    // Check if user already borrowed this book
-    const alreadyBorrowed = borrowedBooks.some(
-      (bb) => bb.bookId === bookId && bb.userId === userId
-    );
-    if (alreadyBorrowed) return;
-
-    // Check if user has reached the limit of 3 books
-    const userBorrowedCount = borrowedBooks.filter(
-      (bb) => bb.userId === userId
-    ).length;
-    if (userBorrowedCount >= 3) return;
-
-    const borrowedBook = {
-      id: `${bookId}-${userId}-${Date.now()}`,
+    setIsLoading(true)
+    const borrowBookDetails = {
       userId,
       bookId,
       borrowDate: new Date().toISOString().split("T")[0],
       returnDate,
-      book,
     };
 
-    const updatedBorrowedBooks = [...borrowedBooks, borrowedBook];
-    setBorrowedBooks(updatedBorrowedBooks);
-    localStorage.setItem("borrowedBooks", JSON.stringify(updatedBorrowedBooks));
+    return addBorrowBookApi(borrowBookDetails).finally(() => {
+      setIsLoading(false)
+    })
 
-    // Decrease book quantity
-    updateBook(bookId, { quantity: book.quantity - 1 });
+    // const book = books.find((b) => b.id === bookId);
+    // if (!book || book.quantity <= 0) return;
+
+    // // Check if user already borrowed this book
+    // const alreadyBorrowed = borrowedBooks.some(
+    //   (bb) => bb.bookId === bookId && bb.userId === userId
+    // );
+    // if (alreadyBorrowed) return;
+
+    // // Check if user has reached the limit of 3 books
+    // const userBorrowedCount = borrowedBooks.filter(
+    //   (bb) => bb.userId === userId
+    // ).length;
+    // if (userBorrowedCount >= 3) return;
+
+    // const borrowedBook = {
+    //   id: `${bookId}-${userId}-${Date.now()}`,
+    //   userId,
+    //   bookId,
+    //   borrowDate: new Date().toISOString().split("T")[0],
+    //   returnDate,
+    //   book,
+    // };
+
+    // const updatedBorrowedBooks = [...borrowedBooks, borrowedBook];
+    // setBorrowedBooks(updatedBorrowedBooks);
+    // localStorage.setItem("borrowedBooks", JSON.stringify(updatedBorrowedBooks));
+
+    // // Decrease book quantity
+    // updateBook(bookId, { quantity: book.quantity - 1 });
   };
 
   const returnBook = (borrowId) => {

@@ -16,7 +16,7 @@ const googleProvider = new GoogleAuthProvider();
 
 function FirebaseAuthProvider({ children }) {
   // console.log("FIREBASE INITILIZE");
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   //   auth loading
   const [isLoading, setisLoading] = useState(true);
@@ -40,7 +40,11 @@ function FirebaseAuthProvider({ children }) {
   const login = (email, password) => {
     setisLoading(true);
     return signInWithEmailAndPassword(auth, email, password).finally(() =>
-      setisLoading(false)
+    {
+      // console.log(user);
+      return setisLoading(false);
+    }
+
     );
   };
   const logout = () => {
