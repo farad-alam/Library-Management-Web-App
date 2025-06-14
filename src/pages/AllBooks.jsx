@@ -249,7 +249,7 @@ const AllBooks = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredBooks.map((book) => (
-                      <tr key={book.id} className="hover:bg-gray-50">
+                      <tr key={book._id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <img
@@ -288,7 +288,7 @@ const AllBooks = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
                           <Link
-                            to={`/book/${book.id}`}
+                            to={`/book/${book._id}`}
                             className="text-primary-600 hover:text-primary-900"
                           >
                             View

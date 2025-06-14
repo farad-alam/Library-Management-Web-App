@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import singleBookApi from "../api/singleBookApi";
 import updateBookApi from "../api/updateBookApi";
 import allBooksApi from "../api/allBooksApi";
+import addBookApi from "../api/addBookApi";
 
 const DataContext = createContext(undefined);
 
@@ -66,11 +67,8 @@ export const DataProvider = ({ children }) => {
   };
 
   const addBook = (newBook) => {
-    const book = {
-      ...newBook,
-      id: Date.now(),
-    };
-    setBooks((prev) => [...prev, book]);
+    setIsLoading(true)
+    return addBookApi(newBook).finally(()=> setIsLoading(false))
   };
 
   const updateBook = (id, updates) => {

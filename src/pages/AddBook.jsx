@@ -227,10 +227,7 @@ const AddBook = () => {
                       <input
                         {...register('image', {
                           required: 'Image URL is required',
-                          pattern: {
-                            value: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
-                            message: 'Please enter a valid image URL',
-                          },
+                          
                         })}
                         type="url"
                         className={`w-full pl-10 pr-4 py-3 border ${
