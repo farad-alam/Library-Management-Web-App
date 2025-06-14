@@ -65,8 +65,8 @@ const Home = () => {
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             className="hero-swiper"
             style={{
-              '--swiper-navigation-color': '#3B82F6',
-              '--swiper-pagination-color': '#3B82F6',
+              "--swiper-navigation-color": "#3B82F6",
+              "--swiper-pagination-color": "#3B82F6",
             }}
           >
             <SwiperSlide>
@@ -79,7 +79,10 @@ const Home = () => {
                     className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
                   >
                     Welcome to Your
-                    <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent"> Digital Library</span>
+                    <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                      {" "}
+                      Digital Library
+                    </span>
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
@@ -87,7 +90,8 @@ const Home = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-xl text-gray-600 mb-8 leading-relaxed"
                   >
-                    Discover thousands of books, manage your reading journey, and connect with a community of book lovers.
+                    Discover thousands of books, manage your reading journey,
+                    and connect with a community of book lovers.
                   </motion.p>
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -133,7 +137,10 @@ const Home = () => {
                     className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
                   >
                     Manage Your
-                    <span className="bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent"> Reading Journey</span>
+                    <span className="bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent">
+                      {" "}
+                      Reading Journey
+                    </span>
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
@@ -141,7 +148,8 @@ const Home = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-xl text-gray-600 mb-8 leading-relaxed"
                   >
-                    Track your borrowed books, discover new favorites, and build your personal reading library with ease.
+                    Track your borrowed books, discover new favorites, and build
+                    your personal reading library with ease.
                   </motion.p>
                 </div>
                 <div className="lg:w-1/2 mt-10 lg:mt-0">
@@ -149,7 +157,7 @@ const Home = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
-                    src="https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    src="https://www.nea.org/sites/default/files/styles/1920wide/public/2023-08/2023-girl-reading-library-adobestock_213325924.jpg.webp"
                     alt="Reading Management"
                     className="w-full max-w-lg mx-auto rounded-2xl shadow-2xl"
                   />
@@ -167,7 +175,10 @@ const Home = () => {
                     className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
                   >
                     Join Our
-                    <span className="bg-gradient-to-r from-accent-600 to-primary-600 bg-clip-text text-transparent"> Book Community</span>
+                    <span className="bg-gradient-to-r from-accent-600 to-primary-600 bg-clip-text text-transparent">
+                      {" "}
+                      Book Community
+                    </span>
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
@@ -175,7 +186,8 @@ const Home = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="text-xl text-gray-600 mb-8 leading-relaxed"
                   >
-                    Connect with fellow readers, share recommendations, and be part of a thriving literary community.
+                    Connect with fellow readers, share recommendations, and be
+                    part of a thriving literary community.
                   </motion.p>
                 </div>
                 <div className="lg:w-1/2 mt-10 lg:mt-0">
@@ -211,7 +223,9 @@ const Home = () => {
                     <stat.icon className="h-8 w-8 text-primary-600" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {stat.value}
+                </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
@@ -220,7 +234,10 @@ const Home = () => {
       </section>
 
       {/* Book Categories Section */}
-      <section id="categories" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+      <section
+        id="categories"
+        className="py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -232,7 +249,8 @@ const Home = () => {
               Explore Book Categories
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover your next favorite book from our carefully curated categories
+              Discover your next favorite book from our carefully curated
+              categories
             </p>
           </motion.div>
 
@@ -258,8 +276,12 @@ const Home = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                     <div className="absolute bottom-4 left-4 text-white">
-                      <h3 className="text-xl font-bold mb-1">{category.name}</h3>
-                      <p className="text-sm opacity-90">{category.bookCount} books</p>
+                      <h3 className="text-xl font-bold mb-1">
+                        {category.name}
+                      </h3>
+                      <p className="text-sm opacity-90">
+                        {category.bookCount} books
+                      </p>
                     </div>
                   </div>
                   <div className="p-6">
@@ -345,8 +367,12 @@ const Home = () => {
                     <feature.icon className="h-8 w-8 text-primary-600" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -365,7 +391,8 @@ const Home = () => {
               Ready to Start Your Reading Journey?
             </h2>
             <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-              Join thousands of readers who have already discovered their next favorite book
+              Join thousands of readers who have already discovered their next
+              favorite book
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
