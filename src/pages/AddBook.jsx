@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { BookOpen, Upload, Star } from 'lucide-react';
 import { useData } from '../contexts/DataContext';
 import Swal from 'sweetalert2';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 const AddBook = () => {
-  const { addBook, books } = useData();
+  const { addBook, books, loadBooks, isLoading } = useData();
   
   const {
     register,
@@ -33,6 +34,7 @@ const AddBook = () => {
         showConfirmButton: false,
       });
 
+      loadBooks()
       reset();
     } catch (error) {
       Swal.fire({
@@ -42,6 +44,10 @@ const AddBook = () => {
       });
     }
   };
+
+  if (isLoading) {
+    return <LoadingSpinner text="Loading info..." />;
+  }
 
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-50 to-blue-50">
