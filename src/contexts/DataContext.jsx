@@ -27,32 +27,37 @@ export const DataProvider = ({ children }) => {
   const { user, isLoading: authisLoading } = useAuth();
 
   useEffect(() => {
-    loadData();
-  }, []);
+
+      loadData();
+    
+  }, [authisLoading, user]);
 
   const loadData = async () => {
     try {
       setIsLoading(true);
 
-      // Load books ----------->>>>>>>>
-      allBooksApi(user).then((data) => setBooks(data));
-      // const booksResponse = await fetch('/books.json');
-      // const booksData = await booksResponse.json();
-      // setBooks(booksData);
+      // Always load books and categories
+      const booksData = await allBooksApi(user); // no user param if not needed
+      const categoryData = await categoryApi();
 
-      // Load categories ----------->>>>>>>>
-      categoryApi().then((res) => setCategories(res));
-      // const categoriesResponse = await fetch("/categories.json");
-      // const categoriesData = await categoriesResponse.json();
-      // setCategories(categoriesData);
+      setBooks(booksData);
+      setCategories(categoryData);
 
-      // Load borrowed books from localStorage ----------->>>>>>>>
-      if (!authisLoading) {
-        getBorrowedBooksByUserIdApi(user.uid).then(data => setBorrowedBooks(data))
+      // Conditionally load borrowed books if user is logged in
+      if (!authisLoading && user?.uid) {
+        const borrowed = await getBorrowedBooksByUserIdApi(user.uid);
+        setBorrowedBooks(borrowed);
       }
-      // const storedBorrowedBooks = localStorage.getItem("borrowedBooks");
-      // if (storedBorrowedBooks) {
-      //   setBorrowedBooks(JSON.parse(storedBorrowedBooks));
+
+      // // Load books ----------->>>>>>>>
+      // await allBooksApi(user).then((data) => setBooks(data));
+
+      // // Load categories ----------->>>>>>>>
+      // await categoryApi().then((res) => setCategories(res));
+
+      // // Load borrowed books from localStorage ----------->>>>>>>>
+      // if (!authisLoading) {
+      //   await getBorrowedBooksByUserIdApi(user.uid).then(data => setBorrowedBooks(data))
       // }
     } catch (error) {
       console.error("Error loading data:", error);
@@ -94,6 +99,7 @@ export const DataProvider = ({ children }) => {
     setIsLoading(true);
     return updateBookApi(id, updates).finally(() => {
       setIsLoading(false);
+      loadBooks()
     });
   };
 

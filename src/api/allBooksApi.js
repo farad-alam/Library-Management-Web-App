@@ -1,13 +1,9 @@
 import axios from "axios";
 
 
-function allBooksApi(user) {
+function allBooksApi() {
   return axios
-    .get(`${import.meta.env.VITE_SERVER_URL}/books/?email=${user.email}`, {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    })
+    .get(`${import.meta.env.VITE_SERVER_URL}/books/`)
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);
