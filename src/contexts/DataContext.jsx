@@ -35,7 +35,7 @@ export const DataProvider = ({ children }) => {
       setIsLoading(true);
 
       // Load books ----------->>>>>>>>
-      allBooksApi().then((data) => setBooks(data));
+      allBooksApi(user).then((data) => setBooks(data));
       // const booksResponse = await fetch('/books.json');
       // const booksData = await booksResponse.json();
       // setBooks(booksData);
@@ -63,7 +63,7 @@ export const DataProvider = ({ children }) => {
 
   const loadBooks = () => {
     setIsLoading(true);
-    return allBooksApi()
+    return allBooksApi(user)
       .then((data) => setBooks(data))
       .finally(() => setIsLoading(false));
   };
