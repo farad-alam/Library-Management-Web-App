@@ -15,6 +15,7 @@ import CategoryBooks from './pages/CategoryBooks';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import FirebaseAuthProvider from './contexts/FirebaseAuthProvider';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -36,9 +37,9 @@ function App() {
                 <Route
                   path="/books"
                   element={
-                    <ProtectedRoute>
+                    
                       <AllBooks />
-                    </ProtectedRoute>
+                    
                   }
                 />
 
@@ -65,6 +66,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <BookDetails />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile/>
                     </ProtectedRoute>
                   }
                 />

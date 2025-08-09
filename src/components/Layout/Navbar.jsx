@@ -24,9 +24,10 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home', public: true },
-    { path: '/books', label: 'All Books', public: false },
+    { path: '/books', label: 'All Books', public: true },
     { path: '/add-book', label: 'Add Book', public: false },
     { path: '/borrowed-books', label: 'Borrowed Books', public: false },
+    { path: '/profile', label: 'Profile', public: false },
   ];
 
   return (
