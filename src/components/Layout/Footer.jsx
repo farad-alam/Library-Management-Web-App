@@ -5,30 +5,30 @@ import { BookOpen, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Github } f
 const Footer = () => {
   const footerSections = [
     {
-      title: 'Quick Links',
+      title: "Quick Links",
       links: [
-        { name: 'Home', href: '/' },
-        { name: 'All Books', href: '/books' },
-        { name: 'Categories', href: '/#categories' },
-        { name: 'About Us', href: '/#about' },
+        { name: "Home", href: "/" },
+        { name: "All Books", href: "/books" },
+        { name: "Categories", href: "/#categories" },
+        { name: "About Us", href: "/#about" },
       ],
     },
     {
-      title: 'Categories',
+      title: "Categories",
       links: [
-        { name: 'Fiction', href: '/category/Fiction' },
-        { name: 'Science', href: '/category/Science' },
-        { name: 'Philosophy', href: '/category/Philosophy' },
-        { name: 'Romance', href: '/category/Romance' },
+        { name: "Fiction", href: "/category/Fiction" },
+        { name: "Science", href: "/category/Science" },
+        { name: "Philosophy", href: "/category/Philosophy" },
+        { name: "Romance", href: "/category/Romance" },
       ],
     },
     {
-      title: 'Support',
+      title: "Support",
       links: [
-        { name: 'Help Center', href: '#' },
-        { name: 'Contact Us', href: '#' },
-        { name: 'Privacy Policy', href: '#' },
-        { name: 'Terms of Service', href: '#' },
+        // { name: 'Help Center', href: '#' },
+        { name: "Contact Us", href: "/contact" },
+        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "Terms of Service", href: "/terms-service" },
       ],
     },
   ];

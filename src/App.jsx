@@ -22,6 +22,9 @@ import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import FirebaseAuthProvider from "./contexts/FirebaseAuthProvider";
 import Profile from "./pages/Profile";
 import Categories from "./pages/Categories";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 
 function App() {
   return (
@@ -41,7 +44,7 @@ function App() {
                 />
 
                 <Route path="/books" element={<AllBooks />} />
-                <Route path="/categories" element={<Categories/>} />
+                <Route path="/categories" element={<Categories />} />
 
                 <Route
                   path="/add-book"
@@ -77,6 +80,10 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+
+                <Route path="/contact" element={<Contact/>} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+                <Route path="/terms-service" element={<TermsOfService/>} />
 
                 <Route path="/404" element={<NotFound />} />
                 <Route path="*" element={<Navigate to="/404" replace />} />
