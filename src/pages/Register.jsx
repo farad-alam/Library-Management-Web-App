@@ -95,14 +95,21 @@ const Register = () => {
             >
               <UserPlus className="h-8 w-8 text-secondary-600" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Join LibraryHub</h2>
-            <p className="text-gray-600">Create your account to start your reading journey</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              Join LibraryHub
+            </h2>
+            <p className="text-gray-600">
+              Create your account to start your reading journey
+            </p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Full Name
                 </label>
                 <div className="relative">
@@ -110,28 +117,33 @@ const Register = () => {
                     <User className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('name', {
-                      required: 'Name is required',
+                    {...register("name", {
+                      required: "Name is required",
                       minLength: {
                         value: 2,
-                        message: 'Name must be at least 2 characters',
+                        message: "Name must be at least 2 characters",
                       },
                     })}
                     type="text"
                     autoComplete="name"
                     className={`block w-full pl-10 pr-3 py-3 border ${
-                      errors.name ? 'border-red-300' : 'border-gray-300'
+                      errors.name ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-colors`}
                     placeholder="Enter your full name"
                   />
                 </div>
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email Address
                 </label>
                 <div className="relative">
@@ -139,28 +151,33 @@ const Register = () => {
                     <Mail className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('email', {
-                      required: 'Email is required',
+                    {...register("email", {
+                      required: "Email is required",
                       pattern: {
                         value: /^\S+@\S+$/i,
-                        message: 'Invalid email address',
+                        message: "Invalid email address",
                       },
                     })}
                     type="email"
                     autoComplete="email"
                     className={`block w-full pl-10 pr-3 py-3 border ${
-                      errors.email ? 'border-red-300' : 'border-gray-300'
+                      errors.email ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-colors`}
                     placeholder="Enter your email"
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="photoURL" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="photoURL"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Photo URL (Optional)
                 </label>
                 <div className="relative">
@@ -168,7 +185,7 @@ const Register = () => {
                     <Image className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('photoURL')}
+                    {...register("photoURL")}
                     type="url"
                     className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-colors"
                     placeholder="Enter your photo URL"
@@ -177,7 +194,10 @@ const Register = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Password
                 </label>
                 <div className="relative">
@@ -185,21 +205,22 @@ const Register = () => {
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('password', {
-                      required: 'Password is required',
+                    {...register("password", {
+                      required: "Password is required",
                       minLength: {
                         value: 6,
-                        message: 'Password must be at least 6 characters',
+                        message: "Password must be at least 6 characters",
                       },
                       pattern: {
                         value: /^(?=.*[a-z])(?=.*[A-Z]).*$/,
-                        message: 'Password must contain at least one uppercase and one lowercase letter',
+                        message:
+                          "Password must contain at least one uppercase and one lowercase letter",
                       },
                     })}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
                     className={`block w-full pl-10 pr-10 py-3 border ${
-                      errors.password ? 'border-red-300' : 'border-gray-300'
+                      errors.password ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-colors`}
                     placeholder="Create a password"
                   />
@@ -216,15 +237,21 @@ const Register = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.password.message}
+                  </p>
                 )}
                 <div className="mt-2 text-xs text-gray-500">
-                  Password must contain at least 6 characters with uppercase and lowercase letters
+                  Password must contain at least 6 characters with uppercase and
+                  lowercase letters
                 </div>
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -232,15 +259,17 @@ const Register = () => {
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('confirmPassword', {
-                      required: 'Please confirm your password',
+                    {...register("confirmPassword", {
+                      required: "Please confirm your password",
                       validate: (value) =>
-                        value === password || 'Passwords do not match',
+                        value === password || "Passwords do not match",
                     })}
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     className={`block w-full pl-10 pr-10 py-3 border ${
-                      errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
+                      errors.confirmPassword
+                        ? "border-red-300"
+                        : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-colors`}
                     placeholder="Confirm your password"
                   />
@@ -257,7 +286,9 @@ const Register = () => {
                   </button>
                 </div>
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.confirmPassword.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -268,19 +299,19 @@ const Register = () => {
                 whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-secondary-600 hover:bg-secondary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white  bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
-                  'Create Account'
+                  "Create Account"
                 )}
               </motion.button>
             </div>
 
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <Link
                   to="/login"
                   className="font-medium text-secondary-600 hover:text-secondary-500 transition-colors"
