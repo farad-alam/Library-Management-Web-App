@@ -54,7 +54,7 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Banner/Slider */}
       <section className="relative pt-16 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50  to-secondary-50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -209,6 +209,19 @@ const Home = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Our Library in Numbers
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              A quick glance at what makes our community of readers thrive
+            </p>
+          </motion.div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <motion.div
