@@ -1,21 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 // import { AuthProvider } from './contexts/AuthContext';
-import { DataProvider } from './contexts/DataContext';
-import Navbar from './components/Layout/Navbar';
-import Footer from './components/Layout/Footer';
-import Home from './pages/Home';
-import AllBooks from './pages/AllBooks';
-import AddBook from './pages/AddBook';
-import BorrowedBooks from './pages/BorrowedBooks';
-import BookDetails from './pages/BookDetails';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import CategoryBooks from './pages/CategoryBooks';
-import NotFound from './pages/NotFound';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
-import FirebaseAuthProvider from './contexts/FirebaseAuthProvider';
-import Profile from './pages/Profile';
+import { DataProvider } from "./contexts/DataContext";
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
+import Home from "./pages/Home";
+import AllBooks from "./pages/AllBooks";
+import AddBook from "./pages/AddBook";
+import BorrowedBooks from "./pages/BorrowedBooks";
+import BookDetails from "./pages/BookDetails";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CategoryBooks from "./pages/CategoryBooks";
+import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+import FirebaseAuthProvider from "./contexts/FirebaseAuthProvider";
+import Profile from "./pages/Profile";
+import Categories from "./pages/Categories";
 
 function App() {
   return (
@@ -34,14 +40,8 @@ function App() {
                   element={<CategoryBooks />}
                 />
 
-                <Route
-                  path="/books"
-                  element={
-                    
-                      <AllBooks />
-                    
-                  }
-                />
+                <Route path="/books" element={<AllBooks />} />
+                <Route path="/categories" element={<Categories/>} />
 
                 <Route
                   path="/add-book"
@@ -73,7 +73,7 @@ function App() {
                   path="/profile"
                   element={
                     <ProtectedRoute>
-                      <Profile/>
+                      <Profile />
                     </ProtectedRoute>
                   }
                 />
