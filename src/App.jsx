@@ -25,13 +25,15 @@ import Categories from "./pages/Categories";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import useTheme from "./hooks/useTheme";
 
 function App() {
+  useTheme()
   return (
     <Router>
       <FirebaseAuthProvider>
         <DataProvider>
-          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+          <div className="min-h-screen bg-gradient-to-  dark:from-gray-900 dark:to-neutral-900 from-slate-50 to-blue-50">
             <Navbar />
             <main className="min-h-screen">
               <Routes>
@@ -81,9 +83,9 @@ function App() {
                   }
                 />
 
-                <Route path="/contact" element={<Contact/>} />
-                <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-                <Route path="/terms-service" element={<TermsOfService/>} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-service" element={<TermsOfService />} />
 
                 <Route path="/404" element={<NotFound />} />
                 <Route path="*" element={<Navigate to="/404" replace />} />

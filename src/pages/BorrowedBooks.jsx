@@ -1,31 +1,31 @@
-import React, { use, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, RotateCcw, BookOpen, Clock } from 'lucide-react';
-import { useData } from '../contexts/DataContext';
+import React, { use, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Calendar, RotateCcw, BookOpen, Clock } from "lucide-react";
+import { useData } from "../contexts/DataContext";
 // import { useAuth } from '../contexts/AuthContext';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import Swal from 'sweetalert2';
-import useAuth from '../hooks/useAuth';
-import singleBookApi from '../api/singleBookApi';
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
+import singleBookApi from "../api/singleBookApi";
 
 const BorrowedBooks = () => {
   const {
-    borrowedBooks :userBorrowedBooks,
+    borrowedBooks: userBorrowedBooks,
     returnBook,
     isLoading,
     setBorrowBook,
-    books
+    books,
   } = useData();
   // const [userBorrowedBooks, setuserBorrowedBooks] = useState([])
-  const [borrowedBookWithBookDetails, setBorrowedBookWithBookDetails] = useState([])
-  const { user, } = useAuth();
+  const [borrowedBookWithBookDetails, setBorrowedBookWithBookDetails] =
+    useState([]);
+  const { user } = useAuth();
   const [isDataLoading, setIsDataLoading] = useState(true);
 
   useEffect(() => {
     document.title = "Borrowed Books - LibraryHub";
 
     const fetchBorrowedBooks = async () => {
-
       const bookDetails = await Promise.all(
         userBorrowedBooks.map(async (book, index) => {
           const bookdata = await singleBookApi(book.bookId);
@@ -37,13 +37,13 @@ const BorrowedBooks = () => {
       );
 
       setBorrowedBookWithBookDetails(bookDetails);
-      setIsDataLoading(false)
+      setIsDataLoading(false);
     };
 
     if (user) {
       fetchBorrowedBooks();
     }
-  },[user, userBorrowedBooks]);
+  }, [user, userBorrowedBooks]);
 
   useEffect(() => {
     if (user) {
@@ -55,20 +55,20 @@ const BorrowedBooks = () => {
 
   const handleReturnBook = (borrowId, borrowBookId, bookTitle) => {
     Swal.fire({
-      title: 'Return Book?',
+      title: "Return Book?",
       text: `Are you sure you want to return "${bookTitle}"?`,
-      icon: 'question',
+      icon: "question",
       showCancelButton: true,
-      confirmButtonColor: '#3B82F6',
-      cancelButtonColor: '#6B7280',
-      confirmButtonText: 'Yes, return it!',
-      cancelButtonText: 'Cancel'
+      confirmButtonColor: "#3B82F6",
+      cancelButtonColor: "#6B7280",
+      confirmButtonText: "Yes, return it!",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         returnBook(borrowId, borrowBookId);
         Swal.fire({
-          icon: 'success',
-          title: 'Book Returned!',
+          icon: "success",
+          title: "Book Returned!",
           text: `"${bookTitle}" has been successfully returned to the library.`,
           timer: 2000,
           showConfirmButton: false,
@@ -78,10 +78,10 @@ const BorrowedBooks = () => {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -116,10 +116,10 @@ const BorrowedBooks = () => {
               <BookOpen className="h-12 w-12 text-primary-600" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-base-content mb-4">
             My Borrowed Books
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-base-content/80 max-w-2xl mx-auto">
             Keep track of your borrowed books and return dates
           </p>
         </motion.div>
@@ -131,30 +131,32 @@ const BorrowedBooks = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+          <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
             <div className="flex items-center">
               <div className="p-3 bg-blue-100 rounded-full">
                 <BookOpen className="h-6 w-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">
+                <p className="text-sm font-medium text-base-content/80">
                   Total Borrowed
                 </p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-base-content">
                   {userBorrowedBooks.length}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+          <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
             <div className="flex items-center">
               <div className="p-3 bg-green-100 rounded-full">
                 <Clock className="h-6 w-6 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">On Time</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm font-medium text-base-content/80">
+                  On Time
+                </p>
+                <p className="text-2xl font-bold text-base-content">
                   {
                     userBorrowedBooks.filter((bb) => !isOverdue(bb.returnDate))
                       .length
@@ -164,14 +166,16 @@ const BorrowedBooks = () => {
             </div>
           </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+          <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
             <div className="flex items-center">
               <div className="p-3 bg-red-100 rounded-full">
                 <Calendar className="h-6 w-6 text-red-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Overdue</p>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-sm font-medium text-base-content/80">
+                  Overdue
+                </p>
+                <p className="text-2xl font-bold text-base-content">
                   {
                     userBorrowedBooks.filter((bb) => isOverdue(bb.returnDate))
                       .length
@@ -190,12 +194,12 @@ const BorrowedBooks = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center py-16"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-12">
+            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-12">
               <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-base-content mb-2">
                 No Borrowed Books
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-base-content/80 mb-6">
                 You haven't borrowed any books yet. Start exploring our
                 collection!
               </p>
@@ -223,7 +227,7 @@ const BorrowedBooks = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-shadow"
+                  className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl transition-shadow"
                 >
                   {/* Book Cover */}
                   <div className="relative">
@@ -251,16 +255,16 @@ const BorrowedBooks = () => {
 
                   {/* Book Details */}
                   <div className="p-6">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">
+                    <h3 className="text-lg font-bold text-base-content mb-2 line-clamp-1">
                       {borrowedBook.book.name}
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-base-content/80 mb-4">
                       by {borrowedBook.book.author}
                     </p>
 
                     {/* Dates */}
                     <div className="space-y-2 mb-6">
-                      <div className="flex items-center text-sm text-gray-600">
+                      <div className="flex items-center text-sm text-base-content/80">
                         <Calendar className="h-4 w-4 mr-2" />
                         <span>
                           Borrowed: {formatDate(borrowedBook.borrowDate)}
@@ -268,7 +272,7 @@ const BorrowedBooks = () => {
                       </div>
                       <div
                         className={`flex items-center text-sm ${
-                          overdue ? "text-red-600" : "text-gray-600"
+                          overdue ? "text-red-600" : "text-base-content/80"
                         }`}
                       >
                         <Clock className="h-4 w-4 mr-2" />
@@ -293,7 +297,7 @@ const BorrowedBooks = () => {
                         handleReturnBook(
                           borrowedBook._id,
                           borrowedBook.book._id,
-                          borrowedBook.book.name,
+                          borrowedBook.book.name
                         )
                       }
                       className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors font-medium"

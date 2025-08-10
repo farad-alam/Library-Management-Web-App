@@ -1,14 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
 
-const LoadingSpinner = ({ 
-  size = 'md', 
-  text = 'Loading...' 
-}) => {
+const LoadingSpinner = ({ size = "md", text = "Loading..." }) => {
   const sizeClasses = {
-    sm: 'h-6 w-6',
-    md: 'h-8 w-8',
-    lg: 'h-12 w-12'
+    sm: "h-6 w-6",
+    md: "h-8 w-8",
+    lg: "h-12 w-12",
   };
 
   return (
@@ -18,7 +15,7 @@ const LoadingSpinner = ({
         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         className={`${sizeClasses[size]} border-4 border-primary-200 border-t-primary-600 rounded-full`}
       />
-      <p className="text-gray-600 font-medium">{text}</p>
+      <p className="text-base-content/80 font-medium">{text}</p>
     </div>
   );
 };

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Mail, Lock, Eye, EyeOff, LogIn } from "lucide-react";
 // import { useAuth } from '../contexts/AuthContext';
-import Swal from 'sweetalert2';
-import useAuth from '../hooks/useAuth';
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login, user, signWithGoogle, isLoading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  
-  const from = location.state?.from?.pathname || '/';
+
+  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -23,7 +23,7 @@ const Login = () => {
 
   // chnage dynamic title and if user redierct to desire url
   useEffect(() => {
-    document.title = 'Login - LibraryHub';
+    document.title = "Login - LibraryHub";
     if (user) {
       navigate(from, { replace: true });
     }
@@ -32,28 +32,30 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await login(data.email, data.password);
-      
+
       Swal.fire({
-        icon: 'success',
-        title: 'Welcome back!',
-        text: 'You have successfully logged in.',
+        icon: "success",
+        title: "Welcome back!",
+        text: "You have successfully logged in.",
         timer: 2000,
         showConfirmButton: false,
       });
-      
+
       navigate(from, { replace: true });
     } catch (error) {
       navigate("/login");
       Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: error instanceof Error ? error.message : 'An error occurred during login',
+        icon: "error",
+        title: "Login Failed",
+        text:
+          error instanceof Error
+            ? error.message
+            : "An error occurred during login",
       });
-      
     }
   };
 
-  const handleGoogleLogin = async() => {
+  const handleGoogleLogin = async () => {
     try {
       await signWithGoogle();
 
@@ -76,7 +78,6 @@ const Login = () => {
             : "An error occurred during login with google",
       });
     }
-    
   };
 
   if (isLoading) {
@@ -95,7 +96,7 @@ const Login = () => {
         transition={{ duration: 0.8 }}
         className="max-w-md w-full space-y-8"
       >
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
+        <div className="bg-base-100/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           <div className="text-center">
             <motion.div
               initial={{ scale: 0 }}
@@ -105,14 +106,21 @@ const Login = () => {
             >
               <LogIn className="h-8 w-8 text-primary-600" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-            <p className="text-gray-600">Sign in to continue your reading journey</p>
+            <h2 className="text-3xl font-bold text-base-content mb-2">
+              Welcome Back
+            </h2>
+            <p className="text-base-content/80">
+              Sign in to continue your reading journey
+            </p>
           </div>
 
           <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Email Address
                 </label>
                 <div className="relative">
@@ -120,28 +128,33 @@ const Login = () => {
                     <Mail className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('email', {
-                      required: 'Email is required',
+                    {...register("email", {
+                      required: "Email is required",
                       pattern: {
                         value: /^\S+@\S+$/i,
-                        message: 'Invalid email address',
+                        message: "Invalid email address",
                       },
                     })}
                     type="email"
                     autoComplete="email"
                     className={`block w-full pl-10 pr-3 py-3 border ${
-                      errors.email ? 'border-red-300' : 'border-gray-300'
+                      errors.email ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                     placeholder="Enter your email"
                   />
                 </div>
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Password
                 </label>
                 <div className="relative">
@@ -149,13 +162,13 @@ const Login = () => {
                     <Lock className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
-                    {...register('password', {
-                      required: 'Password is required',
+                    {...register("password", {
+                      required: "Password is required",
                     })}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
                     className={`block w-full pl-10 pr-10 py-3 border ${
-                      errors.password ? 'border-red-300' : 'border-gray-300'
+                      errors.password ? "border-red-300" : "border-gray-300"
                     } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                     placeholder="Enter your password"
                   />
@@ -165,14 +178,16 @@ const Login = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
                     ) : (
-                      <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                      <Eye className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
                     )}
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.password.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -188,7 +203,7 @@ const Login = () => {
                 {isSubmitting ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 ) : (
-                  'Sign In'
+                  "Sign In"
                 )}
               </motion.button>
             </div>
@@ -198,7 +213,9 @@ const Login = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                <span className="px-2 bg-base-100 text-gray-500">
+                  Or continue with
+                </span>
               </div>
             </div>
 
@@ -208,7 +225,7 @@ const Login = () => {
                 whileTap={{ scale: 0.98 }}
                 type="button"
                 onClick={handleGoogleLogin}
-                className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-base-100 hover:bg-base-200 transition-colors"
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
@@ -233,8 +250,8 @@ const Login = () => {
             </div>
 
             <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Don't have an account?{' '}
+              <p className="text-sm text-base-content/80">
+                Don't have an account?{" "}
                 <Link
                   to="/register"
                   className="font-medium text-primary-600 hover:text-primary-500 transition-colors"

@@ -1,6 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { BookOpen, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Github } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  BookOpen,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Github,
+} from "lucide-react";
 
 const Footer = () => {
   const footerSections = [
@@ -34,10 +43,10 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: '#', color: 'hover:text-blue-600' },
-    { icon: Twitter, href: '#', color: 'hover:text-sky-500' },
-    { icon: Instagram, href: '#', color: 'hover:text-pink-600' },
-    { icon: Github, href: '#', color: 'hover:text-gray-900' },
+    { icon: Facebook, href: "#", color: "hover:text-blue-600" },
+    { icon: Twitter, href: "#", color: "hover:text-sky-500" },
+    { icon: Instagram, href: "#", color: "hover:text-pink-600" },
+    { icon: Github, href: "#", color: "hover:text-base-content" },
   ];
 
   return (
@@ -60,9 +69,11 @@ const Footer = () => {
                 </span>
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed">
-                Your gateway to endless knowledge and literary adventures. Discover, borrow, and explore thousands of books from our digital library.
+                Your gateway to endless knowledge and literary adventures.
+                Discover, borrow, and explore thousands of books from our
+                digital library.
               </p>
-              
+
               {/* Contact Info */}
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-gray-300">
@@ -75,7 +86,9 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-3 text-gray-300">
                   <MapPin className="h-4 w-4 text-primary-400" />
-                  <span className="text-sm">123 Library St, Book City, BC 12345</span>
+                  <span className="text-sm">
+                    123 Library St, Book City, BC 12345
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -88,7 +101,9 @@ const Footer = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <h3 className="text-lg font-semibold mb-4 text-white">{section.title}</h3>
+                <h3 className="text-lg font-semibold mb-4 text-white">
+                  {section.title}
+                </h3>
                 <ul className="space-y-2">
                   {section.links.map((link) => (
                     <li key={link.name}>
@@ -115,7 +130,9 @@ const Footer = () => {
         >
           <div className="text-center">
             <h3 className="text-xl font-semibold mb-2">Stay Updated</h3>
-            <p className="text-gray-300 mb-6">Subscribe to our newsletter for the latest books and updates</p>
+            <p className="text-gray-300 mb-6">
+              Subscribe to our newsletter for the latest books and updates
+            </p>
             <div className="max-w-md mx-auto flex gap-3">
               <input
                 type="email"
@@ -142,9 +159,10 @@ const Footer = () => {
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm text-center md:text-left mb-4 md:mb-0">
-              © {new Date().getFullYear()} LibraryHub. All rights reserved. Made with ❤️ for book lovers.
+              © {new Date().getFullYear()} LibraryHub. All rights reserved. Made
+              with ❤️ for book lovers.
             </p>
-            
+
             {/* Social Links */}
             <div className="flex items-center space-x-4">
               {socialLinks.map((social, index) => (

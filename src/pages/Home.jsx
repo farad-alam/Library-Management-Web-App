@@ -1,23 +1,32 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { BookOpen, Users, Award, TrendingUp, ArrowRight, Star, Clock, Shield } from 'lucide-react';
-import { useData } from '../contexts/DataContext';
-import BookCard from '../components/UI/BookCard';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import {
+  BookOpen,
+  Users,
+  Award,
+  TrendingUp,
+  ArrowRight,
+  Star,
+  Clock,
+  Shield,
+} from "lucide-react";
+import { useData } from "../contexts/DataContext";
+import BookCard from "../components/UI/BookCard";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Home = () => {
   const { books, categories, isLoading } = useData();
 
   useEffect(() => {
-    document.title = 'LibraryHub - Your Digital Library';
+    document.title = "LibraryHub - Your Digital Library";
   }, []);
 
   if (isLoading) {
@@ -26,28 +35,31 @@ const Home = () => {
 
   const featuredBooks = books.slice(0, 6);
   const stats = [
-    { icon: BookOpen, label: 'Total Books', value: '10,000+' },
-    { icon: Users, label: 'Active Members', value: '5,000+' },
-    { icon: Award, label: 'Categories', value: '50+' },
-    { icon: TrendingUp, label: 'Books Borrowed', value: '25,000+' },
+    { icon: BookOpen, label: "Total Books", value: "10,000+" },
+    { icon: Users, label: "Active Members", value: "5,000+" },
+    { icon: Award, label: "Categories", value: "50+" },
+    { icon: TrendingUp, label: "Books Borrowed", value: "25,000+" },
   ];
 
   const features = [
     {
       icon: Clock,
-      title: '24/7 Access',
-      description: 'Access your favorite books anytime, anywhere with our digital library platform.'
+      title: "24/7 Access",
+      description:
+        "Access your favorite books anytime, anywhere with our digital library platform.",
     },
     {
       icon: Star,
-      title: 'Curated Collection',
-      description: 'Discover hand-picked books from various genres, carefully selected for quality.'
+      title: "Curated Collection",
+      description:
+        "Discover hand-picked books from various genres, carefully selected for quality.",
     },
     {
       icon: Shield,
-      title: 'Secure & Reliable',
-      description: 'Your reading data is safe with our secure and reliable library management system.'
-    }
+      title: "Secure & Reliable",
+      description:
+        "Your reading data is safe with our secure and reliable library management system.",
+    },
   ];
 
   return (
@@ -76,7 +88,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
+                    className="text-4xl lg:text-6xl font-bold text-base-content mb-6"
                   >
                     Welcome to Your
                     <span className="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
@@ -88,7 +100,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-xl text-gray-600 mb-8 leading-relaxed"
+                    className="text-xl text-base-content/80 mb-8 leading-relaxed"
                   >
                     Discover thousands of books, manage your reading journey,
                     and connect with a community of book lovers.
@@ -134,7 +146,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
+                    className="text-4xl lg:text-6xl font-bold text-base-content mb-6"
                   >
                     Manage Your
                     <span className="bg-gradient-to-r from-secondary-600 to-accent-600 bg-clip-text text-transparent">
@@ -146,7 +158,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-xl text-gray-600 mb-8 leading-relaxed"
+                    className="text-xl text-base-content/80 mb-8 leading-relaxed"
                   >
                     Track your borrowed books, discover new favorites, and build
                     your personal reading library with ease.
@@ -172,7 +184,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6"
+                    className="text-4xl lg:text-6xl font-bold text-base-content mb-6"
                   >
                     Join Our
                     <span className="bg-gradient-to-r from-accent-600 to-primary-600 bg-clip-text text-transparent">
@@ -184,7 +196,7 @@ const Home = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-xl text-gray-600 mb-8 leading-relaxed"
+                    className="text-xl text-base-content/80 mb-8 leading-relaxed"
                   >
                     Connect with fellow readers, share recommendations, and be
                     part of a thriving literary community.
@@ -207,7 +219,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white/50 backdrop-blur-sm">
+      <section className="py-16 bg-base-100/50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -215,10 +227,10 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-base-content mb-4">
               Our Library in Numbers
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
               A quick glance at what makes our community of readers thrive
             </p>
           </motion.div>
@@ -236,10 +248,12 @@ const Home = () => {
                     <stat.icon className="h-8 w-8 text-primary-600" />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">
+                <div className="text-3xl font-bold text-base-content mb-2">
                   {stat.value}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-base-content/80 font-medium">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -249,7 +263,7 @@ const Home = () => {
       {/* Book Categories Section */}
       <section
         id="categories"
-        className="py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+        className="py-20 bg-gradient-to-br dark:from-gray-900 dark:to-neutral-900 from-gray-50 to-blue-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -258,10 +272,10 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-base-content mb-4">
               Explore Book Categories
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
               Discover your next favorite book from our carefully curated
               categories
             </p>
@@ -279,7 +293,7 @@ const Home = () => {
               >
                 <Link
                   to={`/category/${category.name}`}
-                  className="block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="block bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   <div className="relative overflow-hidden">
                     <img
@@ -298,7 +312,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-base-content/80 leading-relaxed">
                       {category.description}
                     </p>
                   </div>
@@ -310,7 +324,7 @@ const Home = () => {
       </section>
 
       {/* Featured Books Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-base-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -318,10 +332,10 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-base-content mb-4">
               Featured Books
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
               Discover our most popular and highly-rated books
             </p>
           </motion.div>
@@ -350,7 +364,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+      <section className="py-20 bg-gradient-to-br dark:from-gray-900 dark:to-neutral-900 from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -358,10 +372,10 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-base-content mb-4">
               Why Choose LibraryHub?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
               Experience the future of digital library management
             </p>
           </motion.div>
@@ -373,17 +387,17 @@ const Home = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="text-center p-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="text-center p-8 bg-base-100/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-primary-100 rounded-full">
                     <feature.icon className="h-8 w-8 text-primary-600" />
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                <h3 className="text-xl font-bold text-base-content mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-base-content/80 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -410,14 +424,14 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/register"
-                className="inline-flex items-center px-8 py-3 bg-white text-primary-600 rounded-xl hover:bg-gray-100 transition-colors font-semibold text-lg shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-3 bg-base-100 text-primary-600 rounded-xl hover:bg-gray-100 transition-colors font-semibold text-lg shadow-lg hover:shadow-xl"
               >
                 Get Started Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <Link
                 to="/books"
-                className="inline-flex items-center px-8 py-3 border-2 border-white text-white rounded-xl hover:bg-white hover:text-primary-600 transition-colors font-semibold text-lg"
+                className="inline-flex items-center px-8 py-3 border-2 border-white text-white rounded-xl hover:bg-base-100 hover:text-primary-600 transition-colors font-semibold text-lg"
               >
                 Browse Books
               </Link>

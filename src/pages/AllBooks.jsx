@@ -1,44 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, Grid, List, Plus } from 'lucide-react';
-import { useData } from '../contexts/DataContext';
-import BookCard from '../components/UI/BookCard';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
-import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import allBooksApi from '../api/allBooksApi';
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, Filter, Grid, List, Plus } from "lucide-react";
+import { useData } from "../contexts/DataContext";
+import BookCard from "../components/UI/BookCard";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import allBooksApi from "../api/allBooksApi";
 
 const AllBooks = () => {
   const { updateBook, books, loadBooks } = useData();
 
   const [isLoading, setisLoading] = useState(false);
   // const [books, setBooks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
-  const [viewMode, setViewMode] = useState('grid');
+  const [viewMode, setViewMode] = useState("grid");
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
-    document.title = 'All Books - LibraryHub';
+    document.title = "All Books - LibraryHub";
   }, []);
 
-  useEffect(()=>{
-   
-   loadBooks() 
-  },[isUpdateModalOpen])
+  useEffect(() => {
+    loadBooks();
+  }, [isUpdateModalOpen]);
 
   const filteredBooks = books.filter((book) => {
-    const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         book.author.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = !selectedCategory || book.category === selectedCategory;
+    const matchesSearch =
+      book.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.author.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      !selectedCategory || book.category === selectedCategory;
     const matchesAvailability = !showAvailableOnly || book.quantity > 0;
-    
+
     return matchesSearch && matchesCategory && matchesAvailability;
   });
 
-  const categories = [...new Set(books.map(book => book.category))];
+  const categories = [...new Set(books.map((book) => book.category))];
 
   const handleUpdateBook = (book) => {
     setSelectedBook(book);
@@ -51,13 +52,13 @@ const AllBooks = () => {
 
     const formData = new FormData(e.target);
     const updates = {
-      name: formData.get('name'),
-      author: formData.get('author'),
-      category: formData.get('category'),
-      quantity: parseInt(formData.get('quantity')),
-      rating: parseFloat(formData.get('rating')),
-      description: formData.get('description'),
-      image: formData.get('image'),
+      name: formData.get("name"),
+      author: formData.get("author"),
+      category: formData.get("category"),
+      quantity: parseInt(formData.get("quantity")),
+      rating: parseFloat(formData.get("rating")),
+      description: formData.get("description"),
+      image: formData.get("image"),
     };
 
     updateBook(selectedBook._id, updates);
@@ -65,9 +66,9 @@ const AllBooks = () => {
     setSelectedBook(null);
 
     Swal.fire({
-      icon: 'success',
-      title: 'Book Updated!',
-      text: 'The book has been successfully updated.',
+      icon: "success",
+      title: "Book Updated!",
+      text: "The book has been successfully updated.",
       timer: 2000,
       showConfirmButton: false,
     });
@@ -87,11 +88,12 @@ const AllBooks = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-base-content mb-4">
             Our Book Collection
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore our comprehensive library with over {books.length} carefully curated books
+          <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
+            Explore our comprehensive library with over {books.length} carefully
+            curated books
           </p>
         </motion.div>
 
@@ -100,7 +102,7 @@ const AllBooks = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 mb-8"
+          className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 mb-8"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="flex flex-col sm:flex-row gap-4 flex-1">
@@ -122,7 +124,7 @@ const AllBooks = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white"
+                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-base-100"
                 >
                   <option value="">All Categories</option>
                   {categories.map((category) => (
@@ -143,27 +145,29 @@ const AllBooks = () => {
                   onChange={(e) => setShowAvailableOnly(e.target.checked)}
                   className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                 />
-                <span className="text-sm font-medium text-gray-700">Available Only</span>
+                <span className="text-sm font-medium text-gray-700">
+                  Available Only
+                </span>
               </label>
 
               {/* View Toggle */}
               <div className="flex items-center bg-gray-100 rounded-lg p-1">
                 <button
-                  onClick={() => setViewMode('grid')}
+                  onClick={() => setViewMode("grid")}
                   className={`p-2 rounded-md transition-colors ${
-                    viewMode === 'grid'
-                      ? 'bg-primary-600 text-white'
-                      : 'text-gray-600 hover:text-primary-600'
+                    viewMode === "grid"
+                      ? "bg-primary-600 text-white"
+                      : "text-base-content/80 hover:text-primary-600"
                   }`}
                 >
                   <Grid className="h-4 w-4" />
                 </button>
                 <button
-                  onClick={() => setViewMode('table')}
+                  onClick={() => setViewMode("table")}
                   className={`p-2 rounded-md transition-colors ${
-                    viewMode === 'table'
-                      ? 'bg-primary-600 text-white'
-                      : 'text-gray-600 hover:text-primary-600'
+                    viewMode === "table"
+                      ? "bg-primary-600 text-white"
+                      : "text-base-content/80 hover:text-primary-600"
                   }`}
                 >
                   <List className="h-4 w-4" />
@@ -189,14 +193,14 @@ const AllBooks = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-6"
         >
-          <p className="text-gray-600">
+          <p className="text-base-content/80">
             Showing {filteredBooks.length} of {books.length} books
           </p>
         </motion.div>
 
         {/* Books Display */}
         <AnimatePresence mode="wait">
-          {viewMode === 'grid' ? (
+          {viewMode === "grid" ? (
             <motion.div
               key="grid"
               initial={{ opacity: 0 }}
@@ -221,11 +225,11 @@ const AllBooks = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden"
+              className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden"
             >
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50">
+                  <thead className="bg-base-200">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Book
@@ -247,9 +251,9 @@ const AllBooks = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-base-100 divide-y divide-gray-200">
                     {filteredBooks.map((book) => (
-                      <tr key={book._id} className="hover:bg-gray-50">
+                      <tr key={book._id} className="hover:bg-base-200">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <img
@@ -258,13 +262,13 @@ const AllBooks = () => {
                               alt={book.name}
                             />
                             <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">
+                              <div className="text-sm font-medium text-base-content">
                                 {book.name}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-base-content">
                           {book.author}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -273,17 +277,19 @@ const AllBooks = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            book.quantity === 0 
-                              ? 'bg-red-100 text-red-800' 
-                              : book.quantity <= 2 
-                                ? 'bg-yellow-100 text-yellow-800' 
-                                : 'bg-green-100 text-green-800'
-                          }`}>
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${
+                              book.quantity === 0
+                                ? "bg-red-100 text-red-800"
+                                : book.quantity <= 2
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-green-100 text-green-800"
+                            }`}
+                          >
                             {book.quantity}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-base-content">
                           ⭐ {book.rating}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
@@ -343,10 +349,12 @@ const AllBooks = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-base-100 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Update Book</h2>
+                <h2 className="text-2xl font-bold text-base-content mb-6">
+                  Update Book
+                </h2>
                 <form onSubmit={handleUpdateSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -447,7 +455,7 @@ const AllBooks = () => {
                     <button
                       type="button"
                       onClick={() => setIsUpdateModalOpen(false)}
-                      className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="px-4 py-2 text-base-content/80 border border-gray-300 rounded-lg hover:bg-base-200 transition-colors"
                     >
                       Cancel
                     </button>

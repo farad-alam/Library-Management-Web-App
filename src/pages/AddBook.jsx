@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
-import { BookOpen, Upload, Star } from 'lucide-react';
-import { useData } from '../contexts/DataContext';
-import Swal from 'sweetalert2';
-import LoadingSpinner from '../components/UI/LoadingSpinner';
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { BookOpen, Upload, Star } from "lucide-react";
+import { useData } from "../contexts/DataContext";
+import Swal from "sweetalert2";
+import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 const AddBook = () => {
   const { addBook, books, loadBooks, categories, isLoading } = useData();
-  
+
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ const AddBook = () => {
   } = useForm();
 
   useEffect(() => {
-    document.title = 'Add Book - LibraryHub';
+    document.title = "Add Book - LibraryHub";
   }, []);
 
   // const categories = [...new Set(books.map(book => book.category))];
@@ -25,22 +25,22 @@ const AddBook = () => {
   const onSubmit = async (data) => {
     try {
       addBook(data);
-      
+
       Swal.fire({
-        icon: 'success',
-        title: 'Book Added Successfully!',
-        text: 'The new book has been added to the library.',
+        icon: "success",
+        title: "Book Added Successfully!",
+        text: "The new book has been added to the library.",
         timer: 2000,
         showConfirmButton: false,
       });
 
-      loadBooks()
+      loadBooks();
       reset();
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Failed to add the book. Please try again.',
+        icon: "error",
+        title: "Error",
+        text: "Failed to add the book. Please try again.",
       });
     }
   };
@@ -64,11 +64,12 @@ const AddBook = () => {
               <BookOpen className="h-12 w-12 text-primary-600" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-base-content mb-4">
             Add New Book
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Expand our library collection by adding a new book with all the necessary details
+          <p className="text-xl text-base-content/80 max-w-2xl mx-auto">
+            Expand our library collection by adding a new book with all the
+            necessary details
           </p>
         </motion.div>
 
@@ -80,7 +81,7 @@ const AddBook = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8">
+            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Book Name */}
@@ -89,21 +90,23 @@ const AddBook = () => {
                       Book Name *
                     </label>
                     <input
-                      {...register('name', {
-                        required: 'Book name is required',
+                      {...register("name", {
+                        required: "Book name is required",
                         minLength: {
                           value: 2,
-                          message: 'Book name must be at least 2 characters',
+                          message: "Book name must be at least 2 characters",
                         },
                       })}
                       type="text"
                       className={`w-full px-4 py-3 border ${
-                        errors.name ? 'border-red-300' : 'border-gray-300'
+                        errors.name ? "border-red-300" : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                       placeholder="Enter book title"
                     />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.name.message}
+                      </p>
                     )}
                   </div>
 
@@ -113,21 +116,23 @@ const AddBook = () => {
                       Author Name *
                     </label>
                     <input
-                      {...register('author', {
-                        required: 'Author name is required',
+                      {...register("author", {
+                        required: "Author name is required",
                         minLength: {
                           value: 2,
-                          message: 'Author name must be at least 2 characters',
+                          message: "Author name must be at least 2 characters",
                         },
                       })}
                       type="text"
                       className={`w-full px-4 py-3 border ${
-                        errors.author ? 'border-red-300' : 'border-gray-300'
+                        errors.author ? "border-red-300" : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                       placeholder="Enter author name"
                     />
                     {errors.author && (
-                      <p className="mt-1 text-sm text-red-600">{errors.author.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.author.message}
+                      </p>
                     )}
                   </div>
 
@@ -137,12 +142,12 @@ const AddBook = () => {
                       Category *
                     </label>
                     <select
-                      {...register('category', {
-                        required: 'Please select a category',
+                      {...register("category", {
+                        required: "Please select a category",
                       })}
                       className={`w-full px-4 py-3 border ${
-                        errors.category ? 'border-red-300' : 'border-gray-300'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors appearance-none bg-white`}
+                        errors.category ? "border-red-300" : "border-gray-300"
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors appearance-none bg-base-100`}
                     >
                       <option value="">Select Category</option>
                       {categories.map((category) => (
@@ -155,7 +160,9 @@ const AddBook = () => {
                       <option value="Technology">Technology</option>
                     </select>
                     {errors.category && (
-                      <p className="mt-1 text-sm text-red-600">{errors.category.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.category.message}
+                      </p>
                     )}
                   </div>
 
@@ -165,27 +172,29 @@ const AddBook = () => {
                       Quantity *
                     </label>
                     <input
-                      {...register('quantity', {
-                        required: 'Quantity is required',
+                      {...register("quantity", {
+                        required: "Quantity is required",
                         min: {
                           value: 1,
-                          message: 'Quantity must be at least 1',
+                          message: "Quantity must be at least 1",
                         },
                         max: {
                           value: 100,
-                          message: 'Quantity cannot exceed 100',
+                          message: "Quantity cannot exceed 100",
                         },
                       })}
                       type="number"
                       min="1"
                       max="100"
                       className={`w-full px-4 py-3 border ${
-                        errors.quantity ? 'border-red-300' : 'border-gray-300'
+                        errors.quantity ? "border-red-300" : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                       placeholder="Enter quantity"
                     />
                     {errors.quantity && (
-                      <p className="mt-1 text-sm text-red-600">{errors.quantity.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.quantity.message}
+                      </p>
                     )}
                   </div>
 
@@ -197,15 +206,15 @@ const AddBook = () => {
                     <div className="relative">
                       <Star className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-yellow-400" />
                       <input
-                        {...register('rating', {
-                          required: 'Rating is required',
+                        {...register("rating", {
+                          required: "Rating is required",
                           min: {
                             value: 0,
-                            message: 'Rating must be at least 0',
+                            message: "Rating must be at least 0",
                           },
                           max: {
                             value: 5,
-                            message: 'Rating cannot exceed 5',
+                            message: "Rating cannot exceed 5",
                           },
                         })}
                         type="number"
@@ -213,13 +222,15 @@ const AddBook = () => {
                         max="5"
                         step="0.1"
                         className={`w-full pl-10 pr-4 py-3 border ${
-                          errors.rating ? 'border-red-300' : 'border-gray-300'
+                          errors.rating ? "border-red-300" : "border-gray-300"
                         } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                         placeholder="4.5"
                       />
                     </div>
                     {errors.rating && (
-                      <p className="mt-1 text-sm text-red-600">{errors.rating.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.rating.message}
+                      </p>
                     )}
                   </div>
 
@@ -231,19 +242,20 @@ const AddBook = () => {
                     <div className="relative">
                       <Upload className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                       <input
-                        {...register('image', {
-                          required: 'Image URL is required',
-                          
+                        {...register("image", {
+                          required: "Image URL is required",
                         })}
                         type="url"
                         className={`w-full pl-10 pr-4 py-3 border ${
-                          errors.image ? 'border-red-300' : 'border-gray-300'
+                          errors.image ? "border-red-300" : "border-gray-300"
                         } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors`}
                         placeholder="https://example.com/book-cover.jpg"
                       />
                     </div>
                     {errors.image && (
-                      <p className="mt-1 text-sm text-red-600">{errors.image.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.image.message}
+                      </p>
                     )}
                   </div>
 
@@ -253,25 +265,29 @@ const AddBook = () => {
                       Short Description *
                     </label>
                     <textarea
-                      {...register('description', {
-                        required: 'Description is required',
+                      {...register("description", {
+                        required: "Description is required",
                         minLength: {
                           value: 20,
-                          message: 'Description must be at least 20 characters',
+                          message: "Description must be at least 20 characters",
                         },
                         maxLength: {
                           value: 500,
-                          message: 'Description cannot exceed 500 characters',
+                          message: "Description cannot exceed 500 characters",
                         },
                       })}
                       rows={4}
                       className={`w-full px-4 py-3 border ${
-                        errors.description ? 'border-red-300' : 'border-gray-300'
+                        errors.description
+                          ? "border-red-300"
+                          : "border-gray-300"
                       } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none`}
                       placeholder="Enter a brief description of the book..."
                     />
                     {errors.description && (
-                      <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.description.message}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -307,11 +323,11 @@ const AddBook = () => {
             className="space-y-6"
           >
             {/* Guidelines */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-base-content mb-4">
                 📚 Adding Guidelines
               </h3>
-              <ul className="space-y-3 text-sm text-gray-600">
+              <ul className="space-y-3 text-sm text-base-content/80">
                 <li className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>
                   Ensure all required fields are filled accurately
@@ -336,31 +352,41 @@ const AddBook = () => {
             </div>
 
             {/* Library Stats */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-base-content mb-4">
                 📊 Library Statistics
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Total Books</span>
-                  <span className="font-semibold text-primary-600">{books.length}</span>
+                  <span className="text-sm text-base-content/80">
+                    Total Books
+                  </span>
+                  <span className="font-semibold text-primary-600">
+                    {books.length}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Categories</span>
-                  <span className="font-semibold text-secondary-600">{categories.length}</span>
+                  <span className="text-sm text-base-content/80">
+                    Categories
+                  </span>
+                  <span className="font-semibold text-secondary-600">
+                    {categories.length}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Available Books</span>
+                  <span className="text-sm text-base-content/80">
+                    Available Books
+                  </span>
                   <span className="font-semibold text-green-600">
-                    {books.filter(book => book.quantity > 0).length}
+                    {books.filter((book) => book.quantity > 0).length}
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Recent Categories */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-base-content mb-4">
                 🏷️ Available Categories
               </h3>
               <div className="flex flex-wrap gap-2">
