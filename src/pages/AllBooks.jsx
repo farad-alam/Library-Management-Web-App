@@ -88,10 +88,10 @@ const AllBooks = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-base-content mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Our Book Collection
           </h1>
-          <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore our comprehensive library with over {books.length} carefully
             curated books
           </p>
@@ -102,7 +102,7 @@ const AllBooks = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 mb-8"
+          className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 mb-8"
         >
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="flex flex-col sm:flex-row gap-4 flex-1">
@@ -124,7 +124,7 @@ const AllBooks = () => {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-base-100"
+                  className="pl-10 pr-8 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white"
                 >
                   <option value="">All Categories</option>
                   {categories.map((category) => (
@@ -157,7 +157,7 @@ const AllBooks = () => {
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === "grid"
                       ? "bg-primary-600 text-white"
-                      : "text-base-content/80 hover:text-primary-600"
+                      : "text-gray-600 hover:text-primary-600"
                   }`}
                 >
                   <Grid className="h-4 w-4" />
@@ -167,7 +167,7 @@ const AllBooks = () => {
                   className={`p-2 rounded-md transition-colors ${
                     viewMode === "table"
                       ? "bg-primary-600 text-white"
-                      : "text-base-content/80 hover:text-primary-600"
+                      : "text-gray-600 hover:text-primary-600"
                   }`}
                 >
                   <List className="h-4 w-4" />
@@ -193,7 +193,7 @@ const AllBooks = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-6"
         >
-          <p className="text-base-content/80">
+          <p className="text-gray-600">
             Showing {filteredBooks.length} of {books.length} books
           </p>
         </motion.div>
@@ -225,11 +225,11 @@ const AllBooks = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden"
+              className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 overflow-hidden"
             >
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-base-200">
+                  <thead className="bg-gray-50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Book
@@ -251,9 +251,9 @@ const AllBooks = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-base-100 divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {filteredBooks.map((book) => (
-                      <tr key={book._id} className="hover:bg-base-200">
+                      <tr key={book._id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <img
@@ -262,13 +262,13 @@ const AllBooks = () => {
                               alt={book.name}
                             />
                             <div className="ml-4">
-                              <div className="text-sm font-medium text-base-content">
+                              <div className="text-sm font-medium text-gray-900">
                                 {book.name}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-base-content">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {book.author}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -289,7 +289,7 @@ const AllBooks = () => {
                             {book.quantity}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-base-content">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           ⭐ {book.rating}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
@@ -349,10 +349,10 @@ const AllBooks = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-base-100 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-base-content mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
                   Update Book
                 </h2>
                 <form onSubmit={handleUpdateSubmit} className="space-y-4">
@@ -455,7 +455,7 @@ const AllBooks = () => {
                     <button
                       type="button"
                       onClick={() => setIsUpdateModalOpen(false)}
-                      className="px-4 py-2 text-base-content/80 border border-gray-300 rounded-lg hover:bg-base-200 transition-colors"
+                      className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       Cancel
                     </button>

@@ -32,7 +32,7 @@ export default function Profile() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-base-100 rounded-2xl shadow-lg overflow-hidden border border-gray-100"
+          className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
         >
           {/* Cover Image */}
           <div className="relative">
@@ -55,9 +55,7 @@ export default function Profile() {
           <div className="pt-20 pb-8 px-6 text-center border-b border-gray-200">
             <h1 className="text-3xl font-bold text-gray-800">{user.name}</h1>
             <p className="text-gray-500">{user.role}</p>
-            <p className="text-base-content/80 max-w-xl mx-auto mt-4">
-              {user.bio}
-            </p>
+            <p className="text-gray-600 max-w-xl mx-auto mt-4">{user.bio}</p>
           </div>
 
           {/* Profile Details */}

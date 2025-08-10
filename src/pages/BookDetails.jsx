@@ -69,10 +69,10 @@ const BookDetails = () => {
     return (
       <div className="min-h-screen pt-16 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-base-content mb-4">
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
             Book Not Found
           </h1>
-          <p className="text-base-content/80 mb-6">
+          <p className="text-gray-600 mb-6">
             The book you're looking for doesn't exist.
           </p>
           <button
@@ -161,7 +161,7 @@ const BookDetails = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
           onClick={() => navigate(-1)}
-          className="flex items-center space-x-2 text-base-content/80 hover:text-primary-600 transition-colors mb-8"
+          className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 transition-colors mb-8"
         >
           <ArrowLeft className="h-5 w-5" />
           <span>Back</span>
@@ -205,7 +205,7 @@ const BookDetails = () => {
             className="space-y-6"
           >
             <div>
-              <h1 className="text-4xl font-bold text-base-content mb-4">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">
                 {book.name}
               </h1>
 
@@ -251,8 +251,8 @@ const BookDetails = () => {
             </div>
 
             {/* Description */}
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-xl font-semibold text-base-content mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Description
               </h3>
               <p className="text-gray-700 leading-relaxed">
@@ -261,8 +261,8 @@ const BookDetails = () => {
             </div>
 
             {/* Borrow Section */}
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-xl font-semibold text-base-content mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Borrow This Book
               </h3>
 
@@ -289,7 +289,7 @@ const BookDetails = () => {
                 </div>
               ) : (
                 <div>
-                  <p className="text-base-content/80 mb-4">
+                  <p className="text-gray-600 mb-4">
                     Borrow this book for up to 30 days. You can borrow up to 3
                     books at a time.
                   </p>
@@ -335,9 +335,9 @@ const BookDetails = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-base-100 rounded-xl shadow-2xl max-w-md w-full p-6"
+              className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6"
             >
-              <h2 className="text-2xl font-bold text-base-content mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Borrow Book
               </h2>
 
@@ -350,7 +350,7 @@ const BookDetails = () => {
                     type="text"
                     value={user?.displayName || ""}
                     disabled
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-base-200 text-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
                 </div>
 
@@ -362,7 +362,7 @@ const BookDetails = () => {
                     type="email"
                     value={user?.email || ""}
                     disabled
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-base-200 text-gray-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
                   />
                 </div>
 
@@ -398,7 +398,7 @@ const BookDetails = () => {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="px-4 py-2 text-base-content/80 border border-gray-300 rounded-lg hover:bg-base-200 transition-colors"
+                    className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     Cancel
                   </button>

@@ -15,7 +15,7 @@ const LoadingSpinner = ({ size = "md", text = "Loading..." }) => {
         transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         className={`${sizeClasses[size]} border-4 border-primary-200 border-t-primary-600 rounded-full`}
       />
-      <p className="text-base-content/80 font-medium">{text}</p>
+      <p className="text-gray-600 font-medium">{text}</p>
     </div>
   );
 };

@@ -90,7 +90,7 @@ const Register = () => {
         transition={{ duration: 0.8 }}
         className="max-w-md w-full space-y-8"
       >
-        <div className="bg-base-100/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           <div className="text-center">
             <motion.div
               initial={{ scale: 0 }}
@@ -100,10 +100,10 @@ const Register = () => {
             >
               <UserPlus className="h-8 w-8 text-secondary-600" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-base-content mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Join LibraryHub
             </h2>
-            <p className="text-base-content/80">
+            <p className="text-gray-600">
               Create your account to start your reading journey
             </p>
           </div>
@@ -235,9 +235,9 @@ const Register = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     ) : (
-                      <Eye className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     )}
                   </button>
                 </div>
@@ -284,9 +284,9 @@ const Register = () => {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     ) : (
-                      <Eye className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     )}
                   </button>
                 </div>
@@ -315,7 +315,7 @@ const Register = () => {
             </div>
 
             <div className="text-center">
-              <p className="text-sm text-base-content/80">
+              <p className="text-sm text-gray-600">
                 Already have an account?{" "}
                 <Link
                   to="/login"

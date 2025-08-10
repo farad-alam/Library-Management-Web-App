@@ -11,7 +11,7 @@ const BookCard = ({ book, showActions = false, onUpdate }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5, scale: 1.02 }}
       transition={{ duration: 0.3 }}
-      className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl border border-white/20 overflow-hidden group"
+      className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl border border-white/20 overflow-hidden group"
     >
       {/* Book Cover */}
       <div className="relative overflow-hidden">
@@ -39,10 +39,10 @@ const BookCard = ({ book, showActions = false, onUpdate }) => {
       {/* Book Details */}
       <div className="p-6">
         <div className="mb-3">
-          <h3 className="text-lg font-bold text-base-content line-clamp-1 mb-1">
+          <h3 className="text-lg font-bold text-gray-900 line-clamp-1 mb-1">
             {book.name}
           </h3>
-          <div className="flex items-center space-x-2 text-sm text-base-content/80">
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
             <User className="h-4 w-4" />
             <span>{book.author}</span>
           </div>
@@ -65,14 +65,12 @@ const BookCard = ({ book, showActions = false, onUpdate }) => {
               activeColor="#F59E0B"
               color="#E5E7EB"
             />
-            <span className="text-sm text-base-content/80">
-              ({book.rating})
-            </span>
+            <span className="text-sm text-gray-600">({book.rating})</span>
           </div>
         </div>
 
         {/* Description */}
-        <p className="text-base-content/80 text-sm line-clamp-2 mb-4">
+        <p className="text-gray-600 text-sm line-clamp-2 mb-4">
           {book.description}
         </p>
 

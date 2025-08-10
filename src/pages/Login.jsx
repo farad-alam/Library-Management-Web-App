@@ -96,7 +96,7 @@ const Login = () => {
         transition={{ duration: 0.8 }}
         className="max-w-md w-full space-y-8"
       >
-        <div className="bg-base-100/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
+        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-8">
           <div className="text-center">
             <motion.div
               initial={{ scale: 0 }}
@@ -106,10 +106,10 @@ const Login = () => {
             >
               <LogIn className="h-8 w-8 text-primary-600" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-base-content mb-2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
               Welcome Back
             </h2>
-            <p className="text-base-content/80">
+            <p className="text-gray-600">
               Sign in to continue your reading journey
             </p>
           </div>
@@ -178,9 +178,9 @@ const Login = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     ) : (
-                      <Eye className="h-5 w-5 text-gray-400 hover:text-base-content/80" />
+                      <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
                     )}
                   </button>
                 </div>
@@ -213,7 +213,7 @@ const Login = () => {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-base-100 text-gray-500">
+                <span className="px-2 bg-white text-gray-500">
                   Or continue with
                 </span>
               </div>
@@ -225,7 +225,7 @@ const Login = () => {
                 whileTap={{ scale: 0.98 }}
                 type="button"
                 onClick={handleGoogleLogin}
-                className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-base-100 hover:bg-base-200 transition-colors"
+                className="w-full flex justify-center items-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
@@ -250,7 +250,7 @@ const Login = () => {
             </div>
 
             <div className="text-center">
-              <p className="text-sm text-base-content/80">
+              <p className="text-sm text-gray-600">
                 Don't have an account?{" "}
                 <Link
                   to="/register"

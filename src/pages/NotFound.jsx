@@ -15,7 +15,7 @@ const NotFound = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="bg-base-100/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-12"
+          className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 p-12"
         >
           {/* 404 Animation */}
           <motion.div
@@ -52,10 +52,10 @@ const NotFound = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-base-content mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
               Oops! Page Not Found
             </h1>
-            <p className="text-lg text-base-content/80 mb-6">
+            <p className="text-lg text-gray-600 mb-6">
               The page you're looking for seems to have wandered off into the
               digital library. Don't worry, even the best librarians sometimes
               misplace a book!
@@ -111,7 +111,7 @@ const NotFound = () => {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="mt-8 pt-6 border-t border-gray-200"
           >
-            <blockquote className="text-base-content/80 italic">
+            <blockquote className="text-gray-600 italic">
               "A library is not a luxury but one of the necessities of life."
               <footer className="text-sm text-gray-500 mt-2">
                 — Henry Ward Beecher

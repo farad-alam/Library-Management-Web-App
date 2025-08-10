@@ -64,10 +64,10 @@ const AddBook = () => {
               <BookOpen className="h-12 w-12 text-primary-600" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold text-base-content mb-4">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Add New Book
           </h1>
-          <p className="text-xl text-base-content/80 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Expand our library collection by adding a new book with all the
             necessary details
           </p>
@@ -81,7 +81,7 @@ const AddBook = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-8">
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Book Name */}
@@ -147,7 +147,7 @@ const AddBook = () => {
                       })}
                       className={`w-full px-4 py-3 border ${
                         errors.category ? "border-red-300" : "border-gray-300"
-                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors appearance-none bg-base-100`}
+                      } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors appearance-none bg-white`}
                     >
                       <option value="">Select Category</option>
                       {categories.map((category) => (
@@ -323,11 +323,11 @@ const AddBook = () => {
             className="space-y-6"
           >
             {/* Guidelines */}
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-base-content mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 📚 Adding Guidelines
               </h3>
-              <ul className="space-y-3 text-sm text-base-content/80">
+              <ul className="space-y-3 text-sm text-gray-600">
                 <li className="flex items-start">
                   <span className="text-primary-500 mr-2">•</span>
                   Ensure all required fields are filled accurately
@@ -352,31 +352,25 @@ const AddBook = () => {
             </div>
 
             {/* Library Stats */}
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-base-content mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 📊 Library Statistics
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-base-content/80">
-                    Total Books
-                  </span>
+                  <span className="text-sm text-gray-600">Total Books</span>
                   <span className="font-semibold text-primary-600">
                     {books.length}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-base-content/80">
-                    Categories
-                  </span>
+                  <span className="text-sm text-gray-600">Categories</span>
                   <span className="font-semibold text-secondary-600">
                     {categories.length}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-base-content/80">
-                    Available Books
-                  </span>
+                  <span className="text-sm text-gray-600">Available Books</span>
                   <span className="font-semibold text-green-600">
                     {books.filter((book) => book.quantity > 0).length}
                   </span>
@@ -385,8 +379,8 @@ const AddBook = () => {
             </div>
 
             {/* Recent Categories */}
-            <div className="bg-base-100/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
-              <h3 className="text-lg font-semibold text-base-content mb-4">
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 🏷️ Available Categories
               </h3>
               <div className="flex flex-wrap gap-2">

@@ -23,10 +23,10 @@ function Categories() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-base-content mb-4">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Explore Book Categories
             </h2>
-            <p className="text-xl text-base-content/80 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Discover your next favorite book from our carefully curated
               categories
             </p>
@@ -44,7 +44,7 @@ function Categories() {
               >
                 <Link
                   to={`/category/${category.name}`}
-                  className="block bg-base-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                 >
                   <div className="relative overflow-hidden">
                     <img
@@ -63,7 +63,7 @@ function Categories() {
                     </div>
                   </div>
                   <div className="p-6">
-                    <p className="text-base-content/80 leading-relaxed">
+                    <p className="text-gray-600 leading-relaxed">
                       {category.description}
                     </p>
                   </div>

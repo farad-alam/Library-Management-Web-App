@@ -11,16 +11,14 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl font-bold text-base-content mb-4">
-            Contact Us
-          </h1>
-          <p className="text-lg text-base-content/80">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
+          <p className="text-lg text-gray-600">
             Have a question, feedback, or need assistance? We’d love to hear
             from you.
           </p>
         </motion.div>
 
-        <div className="bg-base-100 rounded-xl shadow-lg p-8">
+        <div className="bg-white rounded-xl shadow-lg p-8">
           <form className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700">
@@ -63,7 +61,7 @@ export default function Contact() {
             </button>
           </form>
 
-          <div className="mt-8 text-center text-base-content/80 text-sm">
+          <div className="mt-8 text-center text-gray-600 text-sm">
             <p>
               Email:{" "}
               <a

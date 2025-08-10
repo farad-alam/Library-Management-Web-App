@@ -46,7 +46,7 @@ const Footer = () => {
     { icon: Facebook, href: "#", color: "hover:text-blue-600" },
     { icon: Twitter, href: "#", color: "hover:text-sky-500" },
     { icon: Instagram, href: "#", color: "hover:text-pink-600" },
-    { icon: Github, href: "#", color: "hover:text-base-content" },
+    { icon: Github, href: "#", color: "hover:text-gray-900" },
   ];
 
   return (

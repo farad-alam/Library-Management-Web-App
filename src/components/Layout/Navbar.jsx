@@ -37,7 +37,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-base-100/90 backdrop-blur-md shadow-lg border-b border-white/20"
+          ? "bg-white/90 backdrop-blur-md shadow-lg border-b border-white/20"
           : "bg-transparent"
       }`}
     >
@@ -94,8 +94,8 @@ const Navbar = () => {
                     alt={user.name}
                     className="h-8 w-8 rounded-full ring-2 ring-primary-200 group-hover:ring-primary-300 transition-all cursor-pointer"
                   />
-                  <div className="absolute right-0 top-10 bg-base-100 rounded-lg shadow-lg border border-gray-200 py-2 px-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto">
-                    <p className="text-sm font-medium text-base-content whitespace-nowrap">
+                  <div className="absolute right-0 top-10 bg-white rounded-lg shadow-lg border border-gray-200 py-2 px-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto">
+                    <p className="text-sm font-medium text-gray-900 whitespace-nowrap">
                       {user.name}
                     </p>
                   </div>
@@ -147,7 +147,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-base-100/95 backdrop-blur-md border-t border-gray-200"
+            className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map(
@@ -160,7 +160,7 @@ const Navbar = () => {
                       className={`block px-3 py-2 text-base font-medium rounded-lg transition-colors ${
                         isActive(link.path)
                           ? "text-primary-600 bg-primary-50"
-                          : "text-gray-700 hover:text-primary-600 hover:bg-base-200"
+                          : "text-gray-700 hover:text-primary-600 hover:bg-gray-50"
                       }`}
                     >
                       {link.label}
@@ -176,7 +176,7 @@ const Navbar = () => {
                       alt={user.name}
                       className="h-8 w-8 rounded-full"
                     />
-                    <span className="font-medium text-base-content">
+                    <span className="font-medium text-gray-900">
                       {user.name}
                     </span>
                   </div>
