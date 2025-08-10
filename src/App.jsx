@@ -33,7 +33,7 @@ function App() {
     <Router>
       <FirebaseAuthProvider>
         <DataProvider>
-          <div className="min-h-screen bg-gradient-to-  dark:from-gray-900 dark:to-neutral-900 from-slate-50 to-blue-50">
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
             <Navbar />
             <main className="min-h-screen">
               <Routes>
