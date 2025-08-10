@@ -126,7 +126,7 @@ const Navbar = () => {
                 </Link>
               </div>
             )}
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
 
           {/* Mobile menu button */}

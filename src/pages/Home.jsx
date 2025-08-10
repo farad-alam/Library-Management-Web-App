@@ -66,7 +66,7 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Banner/Slider */}
       <section className="relative pt-16 pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-50  to-secondary-50" />
+        <div className="absolute inset-0 bg-gradient-to-br  from-primary-500  to-secondary-50" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -263,7 +263,7 @@ const Home = () => {
       {/* Book Categories Section */}
       <section
         id="categories"
-        className="py-20 bg-gradient-to-br dark:from-gray-900 dark:to-neutral-900 from-gray-50 to-blue-50"
+        className="py-20 bg-gradient-to-br  from-gray-50 to-blue-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -364,7 +364,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br dark:from-gray-900 dark:to-neutral-900 from-primary-50 to-secondary-50">
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

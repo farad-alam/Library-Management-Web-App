@@ -28,7 +28,7 @@ import TermsOfService from "./pages/TermsOfService";
 import useTheme from "./hooks/useTheme";
 
 function App() {
-  useTheme()
+  // useTheme()
   return (
     <Router>
       <FirebaseAuthProvider>
